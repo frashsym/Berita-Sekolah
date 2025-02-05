@@ -17,7 +17,7 @@ return new class extends Migration
             $table->text('isi_berita'); // Isi berita
             $table->date('tanggal_publikasi'); // Tanggal publikasi berita
             $table->string('penulis'); // Nama penulis
-            $table->foreignId('kategori_id')->constrained('kategoris')->onDelete('cascade'); // FK ke tabel kategori
+            $table->foreignId('kategori_id')->constrained('kategori')->onDelete('cascade'); // FK ke tabel kategori
             $table->string('gambar_utama')->nullable(); // Gambar utama (opsional)
             $table->timestamps(); // Kolom created_at dan updated_at
         });
