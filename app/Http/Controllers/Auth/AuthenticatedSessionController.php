@@ -48,10 +48,10 @@ class AuthenticatedSessionController extends Controller
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout(); // Logout user
-
+    
         $request->session()->invalidate(); // Hapus sesi
         $request->session()->regenerateToken(); // Regenerasi token CSRF
-
-        return redirect('/login')->with('success', 'Anda telah logout.');
+    
+        return redirect()->route('login')->with('success', 'Anda telah logout.');
     }
 }

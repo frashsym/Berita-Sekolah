@@ -13,6 +13,10 @@ Route::get('/', function () {
 // Bagian Dashboard Admin
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/dashboard/berita', [AdminController::class, 'berita']);
+
+// Bagian Authentication
+Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
+Route::post('/login', [AuthenticatedSessionController::class, 'store']);
 Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
 
 // Bagian Bawaan Laravel
