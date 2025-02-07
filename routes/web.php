@@ -12,7 +12,7 @@ Route::get('/', function () {
 
 // Bagian Dashboard Admin
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
-Route::post('/logout', [AuthenticatedSessionController::class, 'logout'])->name('dashboard');
+Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
 
 // Bagian Bawaan Laravel
 Route::middleware('auth')->group(function () {
