@@ -84,7 +84,7 @@ class KategoriController extends Controller
     /**
      * Menghapus kategori (API).
      */
-    public function destroy($id)
+    public function delete($id)
     {
         // Ambil data kategori berdasarkan ID
         $kategori = Kategori::findOrFail($id);
