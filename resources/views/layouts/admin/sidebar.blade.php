@@ -6,10 +6,10 @@
 
         <!-- Sidebar - Brand -->
         <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ url('/dashboard') }}">
-            <div class="sidebar-brand-icon rotate-n-15">
-                <i class="fas fa-laugh-wink"></i>
+            <div class="sidebar-brand-icon">
+                <img src="{{ url('/images/Neper.png') }}" alt="" style="height: 50px; widht: 50px;">
             </div>
-            <div class="sidebar-brand-text mx-3">Dashboard</div>
+            <div class="sidebar-brand-text mx-3">NeperTimes</div>
         </a>
 
         <!-- Divider -->
