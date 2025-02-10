@@ -76,7 +76,7 @@ class BeritaController extends Controller
 
         // Jika dari Web, tampilkan SweetAlert dan redirect
         Alert::success('Sukses', 'Berita berhasil ditambahkan!');
-        return redirect()->route('/berita');
+        return redirect()->route('berita.index');
     }
 
     /**
