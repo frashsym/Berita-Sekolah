@@ -31,7 +31,14 @@ Route::prefix('berita')->middleware(['auth', 'verified'])->group(function () {
 });
 
 // Bagian Kategori
-Route::post('/kategori', [KategoriController::class, 'store'])->middleware(['auth', 'verified'])->name('kategori');
+Route::prefix('kategori')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [KategoriController::class, 'index'])->name('kategori.index'); // Menampilkan daftar berita
+    Route::post('/', [KategoriController::class, 'store'])->name('kategori.store'); // Membuat data berita baru
+    Route::get('/{id}', [KategoriController::class, 'show'])->name('kategori.show'); // Menampilkan detail berita
+    Route::put('/{id}', [KategoriController::class, 'update'])->name('kategori.update'); // Mengedit data berita
+    Route::delete('/{id}', [KategoriController::class, 'delete'])->name('kategori.delete'); // Menghapus data berita
+});
+    
 
 
 

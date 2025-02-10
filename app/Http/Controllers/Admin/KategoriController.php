@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Kategori;
 
 class KategoriController extends Controller
@@ -14,10 +15,15 @@ class KategoriController extends Controller
     public function index()
     {
         $kategoris = Kategori::all();
-        return response()->json([
-            'success' => true,
-            'data' => $kategoris,
-        ]);
+
+ if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $kategoris,  
+            ]);
+        }
+
+       return view('admin.kategori.kategori', compact( 'kategoris'));
     }
 
     /**
@@ -36,12 +42,21 @@ class KategoriController extends Controller
         ]);
 
         // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Kategori berhasil ditambahkan.',
-            'data' => $kategori,
-        ], 201); // Status code 201: Created
+      
+
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Berita berhasil ditambahkan.',
+                'data' => $kategori,
+            ], 201);
+        }
+
+        // Jika dari Web, tampilkan SweetAlert dan redirect
+        Alert::success('Sukses', 'Berita berhasil ditambahkan!');
+        return redirect()->route('kategori.index');
     }
+    
 
     /**
      * Menampilkan detail kategori (API).
@@ -74,13 +89,20 @@ class KategoriController extends Controller
         ]);
 
         // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Kategori berhasil diperbarui.',
-            'data' => $kategori,
-        ]);
-    }
+        
+        if ($request->wantsJson()) {            
+            return response()->json([
+                'success' => true,
+                'message' => 'Kategori berhasil diperbarui.',
+                'data' => $kategori,
+            ]);
+        }
 
+        // Jika dari Web, tampilkan SweetAlert dan redirect
+        Alert::success('Sukses', 'Kategori berhasil diperbaharui!');
+        return redirect()->route('kategori.index');
+    }
+    
     /**
      * Menghapus kategori (API).
      */
@@ -93,9 +115,14 @@ class KategoriController extends Controller
         $kategori->delete();
 
         // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Kategori berhasil dihapus.',
-        ]);
+        if(request()->wantsJson()){
+            return response()->json([
+                'success' => true,
+                'message' => 'Kategori berhasil dihapus.',
+            ]);
+        }
+
+        Alert::success('Sukses', 'Kategori berhasil dihapus!');
+        return redirect()->route('kategori.index');
     }
 }

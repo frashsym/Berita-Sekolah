@@ -19,10 +19,10 @@ class BeritaController extends Controller
         $kategori = Kategori::all(); // Ambil semua kategori dari database
 
         // Cek jika request berasal dari API (Postman)
-        if (request()->wantsJson()) {
+      if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'data' => $berita,
+                'data' => $berita,  
             ]);
         }
 
