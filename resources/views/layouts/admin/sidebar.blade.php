@@ -16,7 +16,7 @@
         <hr class="sidebar-divider my-0">
 
         <!-- Nav Item - Dashboard -->
-        <li class="nav-item active">
+        <li class="nav-item {{ request()->is('dashboard') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/dashboard') }}">
                 <i class="fas fa-fw fa-tachometer-alt"></i>
                 <span>Dashboard</span></a>
@@ -31,7 +31,7 @@
         </div>
 
         <!-- Nav Item - Charts -->
-        <li class="nav-item">
+        <li class="nav-item {{ request()->is('berita') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/berita') }}">
                 <svg style="width: 15px; height: 13px;" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -42,7 +42,7 @@
         </li>
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item">
+        <li class="nav-item {{ request()->is('kategori') ? 'active' : '' }}">
             <a class="nav-link" href="{{ url('/kategori') }}">
                 <svg style="width: 15px; height: 13px;" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -53,8 +53,8 @@
         </li>
 
         <!-- Nav Item - Tables -->
-        <li class="nav-item">
-            <a class="nav-link" href="tables.html">
+        <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
+            <a class="nav-link" href="{{ url('/kategori') }}">
                 <svg style="width: 15px; height: 13px;" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path fill="#ffffff"

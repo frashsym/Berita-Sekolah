@@ -20,7 +20,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
 // Bagian Dashboard Admin
 Route::get('/dashboard', [AdminController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 Route::get('/berita', [BeritaController::class, 'index']);
-Route::apiResource('/kategori', KategoriController::class);
+Route::post('/kategori', [KategoriController::class, 'store']);
+// Route::apiResource('/kategori', KategoriController::class);
 
 
 // Bagian Bawaan Laravel
