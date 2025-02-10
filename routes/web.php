@@ -22,7 +22,11 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Bagian Berita
-Route::get('/berita', [BeritaController::class, 'index'])->middleware(['auth', 'verified'])->name('berita');
+Route::prefix('berita')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [BeritaController::class, 'index'])->name('berita.index'); // Menampilkan daftar berita
+    Route::get('/{id}', [BeritaController::class, 'show'])->name('berita.show'); // Menampilkan detail berita
+});
+
 
 
 // Bagian Kategori

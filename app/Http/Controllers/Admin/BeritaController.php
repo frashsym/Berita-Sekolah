@@ -7,22 +7,24 @@ use App\Models\Berita;
 
 class BeritaController extends Controller
 {
-    // public function index()
-    // {
-    //     return view('admin.berita');
-    // }
     /**
      * Menampilkan daftar berita (API).
      */
-    
-    public function index()
-    {
-        $berita = Berita::with('kategori')->get();
-        return response()->json([
-            'success' => true,
-            'data' => $berita,
-        ]);
-    }
+     public function index(Request $request)
+     {
+         $berita = Berita::with('kategori')->get();
+     
+         // Jika permintaan berasal dari API (Postman atau AJAX), kembalikan JSON
+         if ($request->wantsJson()) {
+             return response()->json([
+                 'success' => true,
+                 'data' => $berita,
+             ]);
+         }
+     
+         // Jika dari browser, kembalikan tampilan halaman admin
+         return view('admin.berita.berita', compact('berita'));
+     }     
 
     /**
      * Menyimpan berita baru (API).
@@ -53,15 +55,22 @@ class BeritaController extends Controller
     /**
      * Menampilkan detail berita (API).
      */
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $berita = Berita::with('kategori')->findOrFail($id);
-        return response()->json([
-            'success' => true,
-            'data' => $berita,
-        ]);
+    
+        // Jika permintaan berasal dari API (Postman atau AJAX), kembalikan JSON
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $berita,
+            ]);
+        }
+    
+        // Jika dari browser, kembalikan tampilan halaman detail berita
+        return view('admin.berita.detail-berita', compact('berita'));
     }
-
+    
     /**
      * Mengupdate berita (API).
      */
