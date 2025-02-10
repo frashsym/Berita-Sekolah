@@ -24,10 +24,11 @@ Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['au
 // Bagian Berita
 Route::prefix('berita')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [BeritaController::class, 'index'])->name('berita.index'); // Menampilkan daftar berita
+    Route::post('/', [BeritaController::class, 'store'])->name('berita.store'); // Membuat data berita baru
     Route::get('/{id}', [BeritaController::class, 'show'])->name('berita.show'); // Menampilkan detail berita
+    Route::put('/{id}', [BeritaController::class, 'update'])->name('berita.update'); // Mengedit data berita
+    Route::delete('/{id}', [BeritaController::class, 'delete'])->name('berita.delete'); // Menghapus data berita
 });
-
-
 
 // Bagian Kategori
 Route::post('/kategori', [KategoriController::class, 'store'])->middleware(['auth', 'verified'])->name('kategori');
