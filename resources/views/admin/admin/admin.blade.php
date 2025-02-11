@@ -34,7 +34,7 @@
                     <tbody>
                         @foreach ($users as $index => $user)
                             <tr>
-                                <td>{{ $index + 1 }}</td>
+                                <td>{{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
                                 <td>{{ $user->name }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
@@ -101,6 +101,9 @@
                         @endforeach
                     </tbody>
                 </table>
+                <div class="d-flex justify-content-center">
+                    {{ $users->links() }}
+                </div>
             </div>
         </div>
     </div>

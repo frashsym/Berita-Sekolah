@@ -40,7 +40,7 @@
                         <tbody>
                             @foreach ($kategoris as $index => $item)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ ($kategoris->currentPage() - 1) * $kategoris->perPage() + $loop->iteration }}</td>
                                     <td>{{ $item->kategori }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
@@ -138,6 +138,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $kategoris->links() }}
+                    </div>
                 </div>
             </div>
         @endsection

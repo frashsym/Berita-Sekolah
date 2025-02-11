@@ -44,7 +44,7 @@
                         <tbody>
                             @foreach ($berita as $index => $item)
                                 <tr>
-                                    <td>{{ $index + 1 }}</td>
+                                    <td>{{ ($berita->currentPage() - 1) * $berita->perPage() + $loop->iteration }}</td>
                                     <td>{{ $item->judul }}</td>
                                     <td>{{ Str::limit($item->isi_berita, 100, '...') }}</td>
                                     <td>{{ $item->kategori->kategori ?? 'Tidak Ada' }}</td>
@@ -92,6 +92,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $berita->links() }}
+                    </div>
                 </div>
             </div>
 

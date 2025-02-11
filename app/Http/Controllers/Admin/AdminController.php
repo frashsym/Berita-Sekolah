@@ -14,7 +14,7 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::paginate(5);
 
         if (request()->wantsJson()) {
             return response()->json([
