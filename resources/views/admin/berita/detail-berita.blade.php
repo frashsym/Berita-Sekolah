@@ -11,7 +11,7 @@
         <div class="card-body">
             @if($berita->gambar_utama)
             <div class="mb-3">
-                <img src="{{ asset('storage/' . $berita->gambar_utama) }}" alt="Gambar Berita" class="img-fluid rounded" style="max-width: 600px;">
+                <img src="{{ asset('images/berita/' . $berita->gambar_utama) }}" alt="Gambar Berita" class="img-fluid rounded" style="max-width: 600px;">
             </div>
             @endif
             <div class="mb-3">

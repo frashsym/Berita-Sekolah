@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
@@ -10,19 +10,24 @@ use App\Models\User;
 class AdminController extends Controller
 {
     /**
-     * Menampilkan daftar user (API).
+     * Menampilkan daftar user (API & Web).
      */
     public function index()
     {
         $users = User::all();
-        return response()->json([
-            'success' => true,
-            'data' => $users,
-        ]);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $users,
+            ]);
+        }
+
+        return view('admin.admin.admin', compact('users'));
     }
 
     /**
-     * Menyimpan user baru (API).
+     * Menyimpan user baru (API & Web).
      */
     public function store(Request $request)
     {
@@ -40,28 +45,36 @@ class AdminController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'User berhasil ditambahkan.',
-            'data' => $user,
-        ], 201);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User berhasil ditambahkan.',
+                'data' => $user,
+            ], 201);
+        }
+
+        return redirect()->route('admin.index')->with('success', 'User berhasil ditambahkan!');
     }
 
     /**
-     * Menampilkan detail user (API).
+     * Menampilkan detail user (API & Web).
      */
     public function show($id)
     {
         $user = User::findOrFail($id);
-        return response()->json([
-            'success' => true,
-            'data' => $user,
-        ]);
+
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $user,
+            ]);
+        }
+
+        // return view('admin.admin.show', compact('user'));
     }
 
     /**
-     * Mengupdate user (API).
+     * Mengupdate user (API & Web).
      */
     public function update(Request $request, $id)
     {
@@ -72,7 +85,6 @@ class AdminController extends Controller
             'password' => 'sometimes|required|string|min:6',
         ]);
 
-        // Ambil data user berdasarkan ID
         $user = User::findOrFail($id);
 
         // Update data
@@ -82,29 +94,32 @@ class AdminController extends Controller
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
 
-        // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'User berhasil diperbarui.',
-            'data' => $user,
-        ]);
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User berhasil diperbarui.',
+                'data' => $user,
+            ]);
+        }
+
+        return redirect()->route('admin.index')->with('success', 'User berhasil diperbarui!');
     }
 
     /**
-     * Menghapus user (API).
+     * Menghapus user (API & Web).
      */
     public function delete($id)
     {
-        // Ambil data user berdasarkan ID
         $user = User::findOrFail($id);
-
-        // Hapus data
         $user->delete();
 
-        // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'User berhasil dihapus.',
-        ]);
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User berhasil dihapus.',
+            ]);
+        }
+
+        return redirect()->route('admin.index')->with('success', 'User berhasil dihapus!');
     }
 }

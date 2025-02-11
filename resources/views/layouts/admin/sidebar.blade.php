@@ -54,7 +54,7 @@
 
         <!-- Nav Item - Tables -->
         <li class="nav-item {{ request()->is('admin') ? 'active' : '' }}">
-            <a class="nav-link" href="{{ url('/kategori') }}">
+            <a class="nav-link" href="{{ url('/admin') }}">
                 <svg style="width: 15px; height: 13px;" xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                     <path fill="#ffffff"
