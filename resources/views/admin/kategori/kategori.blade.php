@@ -1,6 +1,6 @@
 @extends('layouts.admin.app')
 
-@section('title', 'Data kategori')
+@section('title', 'Data Kategori')
 
 @section('content')
     <!-- Begin Page Content -->
@@ -44,7 +44,7 @@
                                     <td>{{ $item->kategori }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <!-- Tombol Detail -->
+                                            <!-- Tombol Edit -->
                                             <button type="button" class="btn btn-success" data-toggle="modal"
                                                 data-target="#editBeritaModal{{ $item->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
@@ -55,17 +55,52 @@
                                             </button>
 
                                             <!-- Tombol Hapus -->
-                                            <form action="{{ route('kategori.delete', $item->id) }}" method="POST"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?');">
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="hapusKategori({{ $item->id }})">
+                                                <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
+                                            </button>
+
+                                            <!-- Form Hapus (Disembunyikan) -->
+                                            <form id="delete-form-{{ $item->id }}"
+                                                action="{{ url('/kategori/' . $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
-                                                    <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
-                                                </button>
                                             </form>
                                         </div>
                                     </td>
                                 </tr>
+
+                                <!-- Modal Create kategori -->
+                                <div class="modal fade" id="createBeritaModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="createBeritaLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="createBeritaLabel">Tambah kategori</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">×</span>
+                                                </button>
+                                            </div>
+                                            <form action="{{ route('kategori.store') }}" method="POST"
+                                                enctype="multipart/form-data">
+                                                @csrf
+                                                <div class="modal-body">
+                                                    <div class="form-group">
+                                                        <label for="kategori">Kategori</label>
+                                                        <input type="text" class="form-control" id="kategori"
+                                                            name="kategori" required>
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-secondary"
+                                                        data-dismiss="modal">Batal</button>
+                                                    <button type="submit" class="btn btn-primary">Simpan </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
 
                                 <!-- Modal Edit kategori -->
                                 <div class="modal fade" id="editBeritaModal{{ $item->id }}" tabindex="-1"
@@ -94,7 +129,7 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">Batal</button>
-                                                    <button type="submit" class="btn btn-primary">Update kategori</button>
+                                                    <button type="submit" class="btn btn-primary">Update</button>
                                                 </div>
                                             </form>
                                         </div>
@@ -105,35 +140,4 @@
                     </table>
                 </div>
             </div>
-
-            <!-- Modal Create kategori -->
-            <div class="modal fade" id="createBeritaModal" tabindex="-1" role="dialog" aria-labelledby="createBeritaLabel"
-                aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="createBeritaLabel">Tambah kategori Baru</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                        </div>
-                        <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data">
-                            @csrf
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <label for="kategori">Kategori</label>
-                                    <input type="text" class="form-control" id="kategori" name="kategori" required>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary">Simpan kategori</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-
-
-
         @endsection

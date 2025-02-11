@@ -52,9 +52,10 @@
                                     <td>{{ $item->tanggal_publikasi }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <!-- Tombol Detail -->
+
+                                            <!-- Tombol Edit -->
                                             <button type="button" class="btn btn-success" data-toggle="modal"
-                                                data-target="#editBeritaModal">
+                                                data-target="#editBeritaModal{{ $item->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                     viewBox="0 0 512 512">
                                                     <path fill="white"
@@ -63,19 +64,27 @@
                                             </button>
 
 
-                                            <!-- Tombol Edit -->
-                                            <a href="{{ url('/berita/edit/' . $item->id) }}" class="btn btn-warning">
-                                                <span class="icon text-white-50"><i class="fas fa-edit"></i></span>
+                                            <!-- Tombol Detail -->
+                                            <a href="{{ url('/berita/' . $item->id) }}" class="btn btn-warning">
+                                                <span class="icon text-white-50">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                        viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                                        <path fill="#ffffff"
+                                                            d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                                                    </svg>
+                                                </span>
                                             </a>
-
                                             <!-- Tombol Hapus -->
-                                            <form action="{{ url('/berita/' . $item->id) }}" method="POST"
-                                                onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?');">
+                                            <button type="button" class="btn btn-danger"
+                                                onclick="hapusBerita({{ $item->id }})">
+                                                <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
+                                            </button>
+
+                                            <!-- Form Hapus (Disembunyikan) -->
+                                            <form id="delete-form-{{ $item->id }}"
+                                                action="{{ url('/berita/' . $item->id) }}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger">
-                                                    <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
-                                                </button>
                                             </form>
                                         </div>
                                     </td>
@@ -128,7 +137,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="gambar_utama">Gambar Utama</label>
-                                    <input type="file" class="form-control-file" id="gambar_utama" name="gambar_utama">
+                                    <input type="file" class="form-control-file" id="gambar_utama"
+                                        name="gambar_utama">
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -140,62 +150,74 @@
                 </div>
             </div>
 
-            <!-- Modal Edit Berita -->
-            <div class="modal fade" id="editBeritaModal" tabindex="-1" role="dialog"
-                aria-labelledby="editBeritaLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="editBeritaLabel">Edit Berita</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">×</span>
-                            </button>
+            @foreach ($berita as $item)
+                <!-- Modal Edit Berita untuk setiap berita -->
+                <div class="modal fade" id="editBeritaModal{{ $item->id }}" tabindex="-1" role="dialog"
+                    aria-labelledby="editBeritaLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="editBeritaLabel">Edit Berita</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="{{ route('berita.update', $item->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <div class="modal-body">
+                                    <div class="form-group">
+                                        <label for="judul">Judul Berita</label>
+                                        <input type="text" class="form-control" id="judul" name="judul"
+                                            value="{{ old('judul', $item->judul) }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="isi_berita">Isi Berita</label>
+                                        <textarea class="form-control" id="isi_berita" name="isi_berita" rows="4" required>{{ old('isi_berita', $item->isi_berita) }}</textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tanggal_publikasi">Tanggal Publikasi</label>
+                                        <input type="date" class="form-control" id="tanggal_publikasi"
+                                            name="tanggal_publikasi"
+                                            value="{{ old('tanggal_publikasi', $item->tanggal_publikasi) }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="penulis">Penulis</label>
+                                        <input type="text" class="form-control" id="penulis" name="penulis"
+                                            value="{{ old('penulis', $item->penulis) }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="kategori_id">Kategori</label>
+                                        <select class="form-control" id="kategori_id" name="kategori_id" required>
+                                            <option value="" disabled>Pilih Kategori</option>
+                                            @foreach ($kategori as $kat)
+                                                <option value="{{ $kat->id }}"
+                                                    {{ old('kategori_id', $item->kategori_id) == $kat->id ? 'selected' : '' }}>
+                                                    {{ $kat->kategori }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="gambar_utama">Ganti Gambar</label>
+                                        <input type="file" class="form-control-file" id="gambar_utama"
+                                            name="gambar_utama">
+
+                                        @if (!empty($item->gambar_utama))
+                                            <div class="mt-2">
+                                                <img src="{{ asset('images/berita/' . $item->gambar_utama) }}"
+                                                    alt="Gambar Berita" class="img-thumbnail" width="150">
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                                </div>
+                            </form>
                         </div>
-                        <form id="editBeritaForm" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <div class="modal-body">
-                                <input type="hidden" id="edit_id" name="id">
-                                <div class="form-group">
-                                    <label for="edit_judul">Judul Berita</label>
-                                    <input type="text" class="form-control" id="edit_judul" name="judul" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit_isi_berita">Isi Berita</label>
-                                    <textarea class="form-control" id="edit_isi_berita" name="isi_berita" rows="4" required></textarea>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit_tanggal_publikasi">Tanggal Publikasi</label>
-                                    <input type="date" class="form-control" id="edit_tanggal_publikasi"
-                                        name="tanggal_publikasi" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit_penulis">Penulis</label>
-                                    <input type="text" class="form-control" id="edit_penulis" name="penulis"
-                                        required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit_kategori_id">Kategori</label>
-                                    <select class="form-control" id="edit_kategori_id" name="kategori_id" required>
-                                        <option value="" disabled>Pilih Kategori</option>
-                                        @foreach ($kategori as $kat)
-                                            <option value="{{ $kat->id }}">{{ $kat->kategori }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <label for="edit_gambar_utama">Gambar Utama</label>
-                                    <input type="file" class="form-control-file" id="edit_gambar_utama"
-                                        name="gambar_utama">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-primary">Update Berita</button>
-                            </div>
-                        </form>
                     </div>
                 </div>
-            </div>
-
+            @endforeach
         @endsection

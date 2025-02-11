@@ -15,10 +15,16 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::all();
-        return response()->json([
-            'success' => true,
-            'data' => $users,
-        ]);
+        // Cek jika request berasal dari API (Postman)
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'data' => $users,
+            ]);
+        }
+
+        // Jika dari browser, tampilkan halaman admin
+        return view('admin.admin.admin', compact('berita', 'kategori'));
     }
 
     /**

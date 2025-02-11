@@ -53,8 +53,7 @@ class KategoriController extends Controller
         }
 
         // Jika dari Web, tampilkan SweetAlert dan redirect
-        Alert::success('Sukses', 'Berita berhasil ditambahkan!');
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
     
 
@@ -99,8 +98,7 @@ class KategoriController extends Controller
         }
 
         // Jika dari Web, tampilkan SweetAlert dan redirect
-        Alert::success('Sukses', 'Kategori berhasil diperbaharui!');
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diupdate!');
     }
     
     /**
@@ -122,7 +120,6 @@ class KategoriController extends Controller
             ]);
         }
 
-        Alert::success('Sukses', 'Kategori berhasil dihapus!');
-        return redirect()->route('kategori.index');
+        return redirect()->route('kategori.index')->with('success', 'Kategori berhasil dihapus!');
     }
 }

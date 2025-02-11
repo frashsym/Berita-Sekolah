@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Berita;
@@ -19,10 +18,10 @@ class BeritaController extends Controller
         $kategori = Kategori::all(); // Ambil semua kategori dari database
 
         // Cek jika request berasal dari API (Postman)
-      if (request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'data' => $berita,  
+                'data' => $berita,
             ]);
         }
 
@@ -38,7 +37,7 @@ class BeritaController extends Controller
     {
         // Validasi input
         $request->validate([
-            'judul' => 'required|string|max:255|unique:berita',
+            'judul' => 'required|string|max:255|',
             'isi_berita' => 'required|string',
             'tanggal_publikasi' => 'required|date',
             'penulis' => 'required|string|max:255',
@@ -49,7 +48,14 @@ class BeritaController extends Controller
         // Proses upload gambar jika ada
         if ($request->hasFile('gambar_utama')) {
             $file = $request->file('gambar_utama');
-            $fileName = time() . '_' . $file->getClientOriginalName();
+
+            // Ambil ekstensi file asli
+            $extension = $file->getClientOriginalExtension();
+
+            // Buat nama file baru dengan format [timestamp]_originalFileName.ext
+            $fileName = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $extension;
+
+            // Pindahkan file ke folder penyimpanan
             $file->move(public_path('images/berita'), $fileName);
         } else {
             $fileName = null;
@@ -62,7 +68,7 @@ class BeritaController extends Controller
             'tanggal_publikasi' => $request->tanggal_publikasi,
             'penulis' => $request->penulis,
             'kategori_id' => $request->kategori_id,
-            'gambar_utama' => $fileName,
+            'gambar_utama' => $fileName, // Simpan nama file dengan format yang diinginkan
         ]);
 
         // Jika request dari API (Postman)
@@ -75,8 +81,7 @@ class BeritaController extends Controller
         }
 
         // Jika dari Web, tampilkan SweetAlert dan redirect
-        Alert::success('Sukses', 'Berita berhasil ditambahkan!');
-        return redirect()->route('berita.index');
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
     }
 
     /**
@@ -85,7 +90,6 @@ class BeritaController extends Controller
     public function show(Request $request, $id)
     {
         $berita = Berita::with('kategori')->findOrFail($id);
-
         // Jika permintaan berasal dari API (Postman atau AJAX), kembalikan JSON
         if ($request->wantsJson()) {
             return response()->json([
@@ -110,22 +114,57 @@ class BeritaController extends Controller
             'tanggal_publikasi' => 'required|date',
             'penulis' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori,id',
-            'gambar_utama' => 'nullable|string',
+            'gambar_utama' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         // Ambil data berita berdasarkan ID
         $berita = Berita::findOrFail($id);
 
-        // Update data
-        $berita->update($request->all());
+        // Cek apakah ada gambar baru diunggah
+        if ($request->hasFile('gambar_utama')) {
+            $file = $request->file('gambar_utama');
 
-        // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Berita berhasil diperbarui.',
-            'data' => $berita,
+            // Ambil ekstensi file asli
+            $extension = $file->getClientOriginalExtension();
+
+            // Buat nama file baru dengan format [timestamp]_originalFileName.ext
+            $fileName = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $extension;
+
+            // Pindahkan file ke folder penyimpanan
+            $file->move(public_path('images/berita'), $fileName);
+
+            // Hapus gambar lama jika ada
+            if ($berita->gambar_utama && file_exists(public_path('images/berita/' . $berita->gambar_utama))) {
+                unlink(public_path('images/berita/' . $berita->gambar_utama));
+            }
+
+            // Simpan nama gambar baru
+            $berita->gambar_utama = $fileName;
+        }
+
+        // Update data berita
+        $berita->update([
+            'judul' => $request->judul,
+            'isi_berita' => $request->isi_berita,
+            'tanggal_publikasi' => $request->tanggal_publikasi,
+            'penulis' => $request->penulis,
+            'kategori_id' => $request->kategori_id,
+            'gambar_utama' => $berita->gambar_utama,
         ]);
+
+        // **Cek jika request dari API (JSON)**
+        if ($request->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Berita berhasil diperbarui.',
+                'data' => $berita,
+            ]);
+        }
+
+        // **Jika dari Web, redirect ke halaman utama**
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil diupdate!');
     }
+
 
     /**
      * Menghapus berita (API).
@@ -135,13 +174,26 @@ class BeritaController extends Controller
         // Ambil data berita berdasarkan ID
         $berita = Berita::findOrFail($id);
 
-        // Hapus data
+        // Hapus gambar jika ada
+        if ($berita->gambar_utama) {
+            $path = public_path('images/berita/' . $berita->gambar_utama);
+            if (file_exists($path)) {
+                unlink($path); // Hapus file gambar
+            }
+        }
+
+        // Hapus data berita
         $berita->delete();
 
-        // Response JSON
-        return response()->json([
-            'success' => true,
-            'message' => 'Berita berhasil dihapus.',
-        ]);
+        // Jika request dari API
+        if (request()->wantsJson()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Berita berhasil dihapus.',
+            ]);
+        }
+
+        // Jika dari Web, tampilkan SweetAlert dan redirect
+        return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus!');
     }
 }
