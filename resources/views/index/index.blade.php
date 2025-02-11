@@ -152,7 +152,7 @@
                                        <div class="board">
                                           <i><img src="images/top_icon.png" alt="#"/></i>
                                           <h3>
-                                             selamat<br>tahun<br> baru
+                                             selamat<br>tahun<br>baru
                                           </h3>
                                           <div class="link_btn">
                                              <a class="read_more" href="Javascript:void(0)">Read More   <span></span></a>
@@ -207,12 +207,9 @@
             <div class="row d_flex">
                <div class="col-md-6">
                   <div class="titlepage text_align_left">
-                     <h2>About <br>Skating <br> school</h2>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variatioThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variationsns
+                     <h2>About <br>NeperTimes<br> 
+                     <p>Sebagai salah satu lembaga pendidikan terkemuka, SMK 1 CIREBON mengedepankan keunggulan akademik, pengembangan karakter, dan kepemimpinan. Fasilitas modern, tenaga pendidik profesional, serta program ekstrakurikuler yang beragam menjadikan sekolah ini pilihan utama bagi para siswa yang ingin meraih masa depan gemilang.
                      </p>
-                     <div class="link_btn">
-                        <a class="read_more" href="about.html">Read More</a>
-                     </div>
                   </div>
                </div>
                <div class="col-md-6">
@@ -225,7 +222,7 @@
       </div>
       <!-- end about -->
       <!-- skating -->
-      <div class="skating">
+      {{-- <div class="skating">
          <div class="container-fluid">
             <div class="row">
                <div class="col-md-12">
@@ -263,7 +260,7 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> --}}
       <!-- end skating -->
       <!-- shop -->
       {{-- <div class="shop">
@@ -287,7 +284,7 @@
       </div>
       <!-- end shop -->
       <!-- testimonial -->
-      <div class="testimonial">
+      {{-- <div class="testimonial">
          <div class="container">
             <div class="row">
                <div class="col-sm-12">
@@ -361,7 +358,7 @@
                                     <div class="col-md-3">
                                        <div class="test_box text_align_center">
                                           <span><img src="images/test1.png" alt="#"/></span>
-                                          <h4>Jone Lo</h4>
+                                          <h4>Jone</h4>
                                           <img class="img_responsive" src="images/te.png" alt="#"/>
                                           <p>humour, or randomised words which don't look even slightly believable. If you are</p>
                                        </div>
@@ -415,7 +412,7 @@
                </div>
             </div>
          </div>
-      </div>
+      </div> --}}
       <!-- end testimonial -->
       <!--  footer -->
       <footer>
@@ -426,10 +423,10 @@
                      <div class="infoma">
                         <h3>Contact Us</h3>
                         <ul class="conta">
-                           <li><i class="fa fa-map-marker" aria-hidden="true"></i>Locations 
+                           <li><i class="fa fa-map-marker" aria-hidden="true"></i>Perjuangan
                            </li>
                            <li><i class="fa fa-phone" aria-hidden="true"></i>Call +01 1234567890</li>
-                           <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="Javascript:void(0)"> demo@gmail.com</a></li>
+                           <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="Javascript:void(0)"> smkn1cirebon.com</a></li>
                         </ul>
                      </div>
                   </div>
@@ -438,26 +435,12 @@
                         <div class="col-md-12">
                            <div class="infoma">
                               <h3>Newsletter</h3>
-                              <form class="form_subscri">
-                                 <div class="row">
-                                    <div class="col-md-12">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <input class="newsl" placeholder="Enter your email" type="text" name="Enter your email">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <input class="newsl" placeholder="Enter your email" type="text" name="Enter your email">
-                                    </div>
-                                    <div class="col-md-4">
-                                       <button class="subsci_btn">subscribe</button>
-                                    </div>
-                                 </div>
-                              </form>
+                            
                            </div>
                         </div>
                         <div class="col-md-9">
                            <div class="infoma">
-                              <h3>Useful Link</h3>
+                              
                               <ul class="fullink">
                                  <li><a href="index.html">Home</a></li>
                                  <li><a href="about.html">About</a></li>
@@ -467,6 +450,7 @@
                               </ul>
                            </div>
                         </div>
+                 
                         <div class="col-md-3">
                            <div class="infoma text_align_left">
                               <ul class="social_icon">

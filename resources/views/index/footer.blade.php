@@ -6,9 +6,9 @@
                 <div class="infoma">
                    <h3>Contact Us</h3>
                    <ul class="conta">
-                      <li><i class="fa fa-map-marker" aria-hidden="true"></i>Locations 
+                      <li><i class="fa fa-map-marker" aria-hidden="true"></i>perjuangan
                       </li>
-                      <li><i class="fa fa-phone" aria-hidden="true"></i>Call +01 1234567890</li>
+                      <li><i class="fa fa-phone" aria-hidden="true"></i>Call 086232142800</li>
                       <li> <i class="fa fa-envelope" aria-hidden="true"></i><a href="Javascript:void(0)"> demo@gmail.com</a></li>
                    </ul>
                 </div>
@@ -65,11 +65,10 @@
           <div class="container">
              <div class="row">
                 <div class="col-md-12">
-                   <p>© 2020 All Rights NEPERTIMES 2025 <a href="https://html.design/"></a></p>
+                   <p>Copyright &copy; NeperTimes 2025</p>
                 </div>
              </div>
           </div>
        </div>
     </div>
  </footer>
- <!-- end footer -->
