@@ -102,10 +102,10 @@
             });
         }
 
-        function hapusUser(id) {
+        function hapusAdmin(id) {
             Swal.fire({
                 title: "Apakah Anda yakin?",
-                text: "Data user akan dihapus secara permanen!",
+                text: "Data admin akan dihapus secara permanen!",
                 icon: "warning",
                 showCancelButton: true,
                 confirmButtonColor: "#d33",

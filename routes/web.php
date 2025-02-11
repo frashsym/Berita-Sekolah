@@ -5,7 +5,6 @@ use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 // Index User
@@ -39,11 +38,14 @@ Route::prefix('kategori')->middleware(['auth', 'verified'])->group(function () {
     Route::delete('/{id}', [KategoriController::class, 'delete'])->name('kategori.delete'); // Menghapus data berita
 });
     
-
-
-
 // Bagian Admin
-
+Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+    Route::get('/', [AdminController::class, 'index'])->name('admin.index'); // Menampilkan daftar berita
+    Route::post('/', [AdminController::class, 'store'])->name('admin.store'); // Membuat data berita baru
+    Route::get('/{id}', [AdminController::class, 'show'])->name('admin.show'); // Menampilkan detail berita
+    Route::put('/{id}', [AdminController::class, 'update'])->name('admin.update'); // Mengedit data berita
+    Route::delete('/{id}', [AdminController::class, 'delete'])->name('admin.delete'); // Menghapus data berita
+});
 
 // Bagian Bawaan Laravel
 // Route::middleware('auth')->group(function () {
