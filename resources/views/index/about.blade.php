@@ -149,8 +149,6 @@
                               <ul class="fullink">
                                  <li><a href="index.html">Home</a></li>
                                  <li><a href="about.html">About</a></li>
-                                 <li><a href="skating.html">Skating</a></li>
-                                 <li><a href="shop.html">Shop</a></li>
                                  <li><a href="contact.html">Contact Us</a></li>
                               </ul>
                            </div>
@@ -173,7 +171,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>© 2020 All Rights Reserved. Design by <a href="https://html.design/"> Free html Templates</a></p>
+                        <p>© NEPERTIMES 2025.  <a href="https://html.design/"> Free html Templates</a></p>
                      </div>
                   </div>
                </div>

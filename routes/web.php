@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Index\IndexController;
 use Illuminate\Support\Facades\Route;
 
 // Index User
@@ -38,6 +39,10 @@ Route::prefix('kategori')->middleware(['auth', 'verified'])->group(function () {
     Route::put('/{id}', [KategoriController::class, 'update'])->name('kategori.update'); // Mengedit data berita
     Route::delete('/{id}', [KategoriController::class, 'delete'])->name('kategori.delete'); // Menghapus data berita
 });
+
+Route::get('layouts.Index', [IndexController::class, 'index']);
+
+
     
 
 

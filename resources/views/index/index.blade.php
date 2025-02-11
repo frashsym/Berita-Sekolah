@@ -37,11 +37,12 @@
       <div class="header">
          <div class="container-fluid">
             <div class="row d_flex">
-               <div class=" col-md-2 col-sm-3 col logo_section">
+               <div class=" col-md-2 col-sm-5 col logo_section">
                   <div class="full">
                      <div class="center-desk">
                         <div class="logo">
-                           <a href="index.html"><img src="images/logo.png" alt="#" /></a>
+                           <a href="index.html"><img src="images/Neper.png" alt="#" style="max-width: 110px; height: auto;" /></a>
+
                         </div>
                      </div>
                   </div>
@@ -151,7 +152,7 @@
                                        <div class="board">
                                           <i><img src="images/top_icon.png" alt="#"/></i>
                                           <h3>
-                                             Skating<br> Board<br> School
+                                             selamat<br>tahun<br> baru
                                           </h3>
                                           <div class="link_btn">
                                              <a class="read_more" href="Javascript:void(0)">Read More   <span></span></a>
@@ -160,7 +161,7 @@
                                     </div>
                                     <div class="col-md-7">
                                        <div class="banner_img">
-                                          <figure><img class="img_responsive" src="images/banner_img.png"></figure>
+                                          <figure><img class="img_responsive" src="images/bannerg_img.pn"></figure>
                                        </div>
                                     </div>
                                  </div>
@@ -194,30 +195,7 @@
                   </div>
                </div>
             </div>
-            <div class="row">
-               <div class="col-md-4 margi_bottom">
-                  <div class="class_box text_align_center">
-                     <i><img src="images/class1.png" alt="#"/></i>
-                     <h3>Skateboard</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variations </p>
-                  </div>
-                  <a class="read_more" href="Javascript:void(0)">Read More</a>
-               </div>
-               <div class="col-md-4 margi_bottom">
-                  <div class="class_box blue text_align_center">
-                     <i><img src="images/class2.png" alt="#"/></i>
-                     <h3>Skateboard</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variations </p>
-                  </div>
-                  <a class="read_more" href="Javascript:void(0)">Read More</a>
-               </div>
-               <div class="col-md-4 margi_bottom">
-                  <div class="class_box text_align_center">
-                     <i><img src="images/class3.png" alt="#"/></i>
-                     <h3>Skateboard</h3>
-                     <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variations </p>
-                  </div>
-                  <a class="read_more" href="Javascript:void(0)">Read More</a>
+           
                </div>
             </div>
          </div>
@@ -239,7 +217,7 @@
                </div>
                <div class="col-md-6">
                   <div class="about_img text_align_center">
-                     <figure><img src="images/about.png" alt="#"/></figure>
+                     <figure><img src="images/thun.png" alt="#"/></figure>
                   </div>
                </div>
             </div>
@@ -288,22 +266,22 @@
       </div>
       <!-- end skating -->
       <!-- shop -->
-      <div class="shop">
+      {{-- <div class="shop">
          <div class="container-fluid">
             <div class="row d_flex d_grid">
                <div class="col-md-7">
                   <div class="shop_img text_align_center" data-aos="fade-right">
                      <figure><img class="img_responsive" src="images/shop.png" alt="#"/></figure>
                   </div>
-               </div>
-               <div class="col-md-5 order_1_mobile">
+               </div> --}}
+               {{-- <div class="col-md-5 order_1_mobile">
                   <div class="titlepage text_align_left ">
                      <h2>Our  Skate <br>Shop</h2>
                      <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variatioThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alterationThere are many variationsns
                      </p>
                      <a class="read_more" href="shop.html">Buy Now</a>
                   </div>
-               </div>
+               </div> --}}
             </div>
          </div>
       </div>
@@ -507,7 +485,7 @@
                <div class="container">
                   <div class="row">
                      <div class="col-md-12">
-                        <p>© 2020 All Rights Reserved. Design by <a href="https://html.design/"> Free html Templates</a></p>
+                        <p>Copyright &copy; NeperTimes 2025</p>
                      </div>
                   </div>
                </div>
