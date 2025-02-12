@@ -18,81 +18,32 @@
                                 <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
                             </ol>
                             <div class="carousel-inner">
-                                <!-- first slide -->
-                                <div class="carousel-item active">
-                                    <div class="carousel-caption relative">
-                                        <div class="row d_flex">
-                                            <div class="col-md-5">
-                                                <div class="board">
-                                                    <i><img src="images/top_icon.png" alt="#" /></i>
-                                                    <h3>
-                                                        Skating<br> Board<br> School
-                                                    </h3>
-                                                    <div class="link_btn">
-                                                        <a class="read_more" href="Javascript:void(0)">Read More
-                                                            <span></span></a>
+                                @foreach ($beritaTerbaru as $key => $berita)
+                                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                                        <div class="carousel-caption relative">
+                                            <div class="row d_flex">
+                                                <div class="col-md-5">
+                                                    <div class="board">
+                                                        <h3>{{ $berita->judul }}</h3> <!-- Tampilkan judul berita -->
+                                                        <div class="link_btn">
+                                                            <a class="read_more" href="">Read
+                                                                More<span></span></a>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <div class="banner_img">
-                                                    <figure><img class="img_responsive" src="images/banner_img.png">
-                                                    </figure>
+                                                <div class="col-md-7">
+                                                    <div class="banner_img">
+                                                        <figure>
+                                                            <img class="img_responsive" style="width: 500px; height: 600px;"
+                                                                src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
+                                                                alt="{{ $berita->judul }}">
+                                                        </figure>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                <!-- second slide -->
-                                <div class="carousel-item">
-                                    <div class="carousel-caption relative">
-                                        <div class="row d_flex">
-                                            <div class="col-md-5">
-                                                <div class="board">
-                                                    <i><img src="images/top_icon.png" alt="#" /></i>
-                                                    <h3>
-                                                        Skating<br> Board<br> School
-                                                    </h3>
-                                                    <div class="link_btn">
-                                                        <a class="read_more" href="Javascript:void(0)">Read More
-                                                            <span></span></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <div class="banner_img">
-                                                    <figure><img class="img_responsive" src="images/banner_img.png">
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- third slide-->
-                                <div class="carousel-item">
-                                    <div class="carousel-caption relative">
-                                        <div class="row d_flex">
-                                            <div class="col-md-5">
-                                                <div class="board">
-                                                    <i><img src="images/top_icon.png" alt="#" /></i>
-                                                    <h3>
-                                                        Skating<br> Board<br> School
-                                                    </h3>
-                                                    <div class="link_btn">
-                                                        <a class="read_more" href="Javascript:void(0)">Read More
-                                                            <span></span></a>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-7">
-                                                <div class="banner_img">
-                                                    <figure><img class="img_responsive" src="images/banner_img.png">
-                                                    </figure>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                             <!-- controls -->
                             <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button"
@@ -119,19 +70,17 @@
             <div class="row d_flex">
                 <div class="col-md-6">
                     <div class="titlepage text_align_left">
-                        <h2>About <br>Skating <br> school</h2>
-                        <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered
-                            alterationThere are many variatioThere are many variations of passages of Lorem Ipsum available,
-                            but the majority have suffered alterationThere are many variationsns
+                        <h2>About <br>NeperTimes</h2>
+                        <p>
+                            NeperTimes adalah sebuah platform berita digital yang lahir dari kreativitas dan dedikasi
+                            sekelompok siswa jurusan Rekayasa Perangkat Lunak (RPL). Website ini dikembangkan sebagai bagian
+                            dari tugas yang diberikan oleh guru jurusan, dengan tujuan tidak hanya memenuhi persyaratan
+                            akademik, tetapi juga memberikan manfaat nyata bagi komunitas sekolah dan masyarakat luas.
                         </p>
                         <div class="link_btn">
-                            <a class="read_more" href="about.html">Read More</a>
+                            <a class="read_more" href="{{ url('/about') }}">Read More</a>
                         </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="about_img text_align_center">
-                        <figure><img src="images/about.png" alt="#" /></figure>
+                        <br>
                     </div>
                 </div>
             </div>
