@@ -16,14 +16,14 @@ class KategoriController extends Controller
     {
         $kategoris = Kategori::paginate(5);
 
- if (request()->wantsJson()) {
+        if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
-                'data' => $kategoris,  
+                'data' => $kategoris,
             ]);
         }
 
-       return view('admin.kategori.kategori', compact( 'kategoris'));
+        return view('admin.kategori.kategori', compact('kategoris'));
     }
 
     /**
@@ -42,7 +42,7 @@ class KategoriController extends Controller
         ]);
 
         // Response JSON
-      
+
 
         if ($request->wantsJson()) {
             return response()->json([
@@ -55,7 +55,7 @@ class KategoriController extends Controller
         // Jika dari Web, tampilkan SweetAlert dan redirect
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan!');
     }
-    
+
 
     /**
      * Menampilkan detail kategori (API).
@@ -88,8 +88,8 @@ class KategoriController extends Controller
         ]);
 
         // Response JSON
-        
-        if ($request->wantsJson()) {            
+
+        if ($request->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Kategori berhasil diperbarui.',
@@ -100,7 +100,7 @@ class KategoriController extends Controller
         // Jika dari Web, tampilkan SweetAlert dan redirect
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil diupdate!');
     }
-    
+
     /**
      * Menghapus kategori (API).
      */
@@ -113,7 +113,7 @@ class KategoriController extends Controller
         $kategori->delete();
 
         // Response JSON
-        if(request()->wantsJson()){
+        if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Kategori berhasil dihapus.',

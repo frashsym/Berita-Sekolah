@@ -27,8 +27,8 @@
                             <li class="nav-item {{ request()->is('about') ? 'active' : '' }}">
                                 <a class="nav-link" href="{{ url('/about') }}">About</a>
                             </li>
-                            <li class="nav-item {{ request()->is('kategori') ? 'active' : '' }}">
-                                <a class="nav-link" href="{{ url('/kategori') }}">Kategori</a>
+                            <li class="nav-item {{ request()->is('kategori/berita') ? 'active' : '' }}">
+                                <a class="nav-link" href="{{ url('/kategori/berita') }}">Kategori</a>
                             </li>
                         </ul>
                     </div>

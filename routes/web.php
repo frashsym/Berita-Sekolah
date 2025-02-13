@@ -1,16 +1,19 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\KategoriController;
 use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Index\IndexController;
 use Illuminate\Support\Facades\Route;
 
 // Index User
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/about', [IndexController::class, 'about'])->name('about');
+Route::get('/readmore/{id}', [IndexController::class, 'readmore'])->name('readmore');
+Route::get('/kategori/berita', [IndexController::class, 'kategori'])->name('kategori.berita');
+Route::get('/berita/kategori/{id}', [IndexController::class, 'beritaByKategori'])->name('berita.kategori');
 
 // Bagian Authentication
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
