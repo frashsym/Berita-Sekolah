@@ -18,7 +18,7 @@ Route::get('/berita/kategori/{id}', [IndexController::class, 'beritaByKategori']
 // Bagian Authentication
 Route::get('/login', [AuthenticatedSessionController::class, 'create'])->name('login');
 Route::post('/login', [AuthenticatedSessionController::class, 'store']);
-Route::post('/logout', [AuthenticatedSessionController::class, 'logout']);
+Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
 // Bagian Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

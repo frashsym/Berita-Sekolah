@@ -24,22 +24,22 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-5">
                                                     <div class="board">
-                                                        <h3>{{ $berita->judul }}</h3> <!-- Tampilkan judul berita -->
+                                                        <h3 class="">{{ $berita->judul }}</h3> <!-- Tampilkan judul berita -->
                                                         <div class="link_btn">
                                                             <a class="read_more" href="{{ route('readmore', $berita->id) }}">
                                                                 Read More<span></span></a>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class="col-md-7">
+                                                <div class="col-md-7 d-flex flex-column">
                                                     <div class="banner_img">
-                                                        <figure>
+                                                        <figure class="d-flex flex-column align-items-end mr-5">
                                                             <img class="img_responsive" style="width: 500px; height: 600px;"
                                                                 src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
                                                                 alt="{{ $berita->judul }}">
                                                         </figure>
                                                     </div>
-                                                </div>
+                                                </div>                                                
                                             </div>
                                         </div>
                                     </div>

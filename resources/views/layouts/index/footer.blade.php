@@ -37,13 +37,9 @@
                         <div class="col-md-3">
                             <div class="infoma text_align_left">
                                 <ul class="social_icon">
-                                    <li><a href="Javascript:void(0)"><i class="fa fa-facebook"
+                                    <li><a href="https://www.instagram.com/smkn1cirebon/?igsh=aGRlYjdhNjE3NW5q"><i class="fa fa-instagram"
                                                 aria-hidden="true"></i></a></li>
-                                    <li><a href="Javascript:void(0)"><i class="fa fa-twitter"
-                                                aria-hidden="true"></i></a></li>
-                                    <li><a href="Javascript:void(0)"><i class="fa fa-linkedin-square"
-                                                aria-hidden="true"></i></a></li>
-                                    <li><a href="Javascript:void(0)"><i class="fa fa-instagram"
+                                    <li><a href="https://www.youtube.com/@smknegeri1cirebonofficial472"><i class="fa fa-youtube"
                                                 aria-hidden="true"></i></a></li>
                                 </ul>
                             </div>
