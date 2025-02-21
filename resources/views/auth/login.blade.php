@@ -28,9 +28,6 @@
                 Log in
             </button>
         </form>
-        <div class="text-center mt-4">
-            <a href="forgot-password.html" class="text-blue-500 hover:underline">Forgot Password?</a>
-        </div>
     </div>
 </body>
 </html>
