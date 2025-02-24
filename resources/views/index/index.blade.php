@@ -64,30 +64,6 @@
         </div>
     </div>
     <!-- end banner -->
-    <!-- about -->
-    <br><br><br>
-    <div class="about">
-        <div class="container-fluid">
-            <div class="row d_flex">
-                <div class="col-md-6">
-                    <div class="titlepage text_align_left">
-                        <h2>About <br>NeperTimes</h2>
-                        <p>
-                            NeperTimes adalah sebuah platform berita digital yang lahir dari kreativitas dan dedikasi
-                            sekelompok siswa jurusan Rekayasa Perangkat Lunak (RPL). Website ini dikembangkan sebagai bagian
-                            dari tugas yang diberikan oleh guru jurusan, dengan tujuan tidak hanya memenuhi persyaratan
-                            akademik, tetapi juga memberikan manfaat nyata bagi komunitas sekolah dan masyarakat luas.
-                        </p>
-                        <div class="link_btn">
-                            <a class="read_more" href="{{ url('/about') }}">Read More</a>
-                        </div>
-                        <br>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end about -->
     <!-- Berita Lainnya -->
     <div class="class">
         <div class="container">
