@@ -82,6 +82,11 @@
                                                         value="{{ $user->name }}" required>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Username</label>
+                                                    <input type="text" class="form-control" name="username"
+                                                        value="{{ $user->username }}" required>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Email</label>
                                                     <input type="email" class="form-control" name="email"
                                                         value="{{ $user->email }}" required>
@@ -124,6 +129,10 @@
                         <div class="form-group">
                             <label>Nama</label>
                             <input type="text" class="form-control" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Username</label>
+                            <input type="text" class="form-control" name="username" required>
                         </div>
                         <div class="form-group">
                             <label>Email</label>

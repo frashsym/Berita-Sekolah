@@ -34,6 +34,7 @@ class AdminController extends Controller
         // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
         ]);
@@ -41,6 +42,7 @@ class AdminController extends Controller
         // Simpan data ke database
         $user = User::create([
             'name' => $request->name,
+            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -59,19 +61,19 @@ class AdminController extends Controller
     /**
      * Menampilkan detail user (API & Web).
      */
-    public function show($id)
-    {
-        $user = User::findOrFail($id);
+    // public function show($id)
+    // {
+    //     $user = User::findOrFail($id);
 
-        if (request()->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'data' => $user,
-            ]);
-        }
+    //     if (request()->wantsJson()) {
+    //         return response()->json([
+    //             'success' => true,
+    //             'data' => $user,
+    //         ]);
+    //     }
 
-        // return view('admin.admin.show', compact('user'));
-    }
+    //     // return view('admin.admin.show', compact('user'));
+    // }
 
     /**
      * Mengupdate user (API & Web).
@@ -81,6 +83,7 @@ class AdminController extends Controller
         // Validasi input
         $request->validate([
             'name' => 'sometimes|required|string|max:255',
+            'username' => 'sometimes|required|string|max:255',
             'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
             'password' => 'sometimes|required|string|min:6',
         ]);
@@ -90,6 +93,7 @@ class AdminController extends Controller
         // Update data
         $user->update([
             'name' => $request->name ?? $user->name,
+            'username' => $request->username ?? $user->username,
             'email' => $request->email ?? $user->email,
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
