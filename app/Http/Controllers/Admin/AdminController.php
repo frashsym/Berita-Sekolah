@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Role;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        $users = User::paginate(5);
+        $users = User::with('role')->paginate(5);
+        $roles = Role::all();
 
         if (request()->wantsJson()) {
             return response()->json([
@@ -23,7 +25,7 @@ class AdminController extends Controller
             ]);
         }
 
-        return view('admin.admin.admin', compact('users'));
+        return view('admin.admin.admin', compact('users', 'roles'));
     }
 
     /**
@@ -31,18 +33,30 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        // Validasi input
+        // Validasi input dengan pesan error kustom
         $request->validate([
             'name' => 'required|string|max:255',
             'username' => 'required|string|max:255',
+            'role_id' => 'required|exists:roles,id',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:6',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'username.required' => 'Username wajib diisi.',
+            'role_id.required' => 'Pilih salah satu role.',
+            'username.max' => 'Username tidak boleh lebih dari 255 karakter.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan, coba gunakan email lain.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.',
         ]);
 
         // Simpan data ke database
         $user = User::create([
             'name' => $request->name,
             'username' => $request->username,
+            'role_id' => $request->role_id,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
@@ -58,22 +72,6 @@ class AdminController extends Controller
         return redirect()->route('admin.index')->with('success', 'User berhasil ditambahkan!');
     }
 
-    /**
-     * Menampilkan detail user (API & Web).
-     */
-    // public function show($id)
-    // {
-    //     $user = User::findOrFail($id);
-
-    //     if (request()->wantsJson()) {
-    //         return response()->json([
-    //             'success' => true,
-    //             'data' => $user,
-    //         ]);
-    //     }
-
-    //     // return view('admin.admin.show', compact('user'));
-    // }
 
     /**
      * Mengupdate user (API & Web).
@@ -84,8 +82,19 @@ class AdminController extends Controller
         $request->validate([
             'name' => 'sometimes|required|string|max:255',
             'username' => 'sometimes|required|string|max:255',
+            'role_id' => 'required|exists:roles,id',
             'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $id,
-            'password' => 'sometimes|required|string|min:6',
+            'password' => 'nullable|min:6',
+        ], [
+            'name.required' => 'Nama wajib diisi.',
+            'username.required' => 'Username wajib diisi.',
+            'username.max' => 'Username tidak boleh lebih dari 255 karakter.',
+            'role_id.required' => 'Pilih salah satu role.',
+            'email.required' => 'Email wajib diisi.',
+            'email.email' => 'Format email tidak valid.',
+            'email.unique' => 'Email sudah digunakan, coba gunakan email lain.',
+            'password.required' => 'Password wajib diisi.',
+            'password.min' => 'Password minimal 6 karakter.',
         ]);
 
         $user = User::findOrFail($id);

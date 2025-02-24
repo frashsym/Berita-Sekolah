@@ -26,8 +26,9 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Username</th>
                             <th>Nama</th>
+                            <th>Username</th>
+                            <th>Role</th>
                             <th>Email</th>
                             <th>Aksi</th>
                         </tr>
@@ -36,8 +37,9 @@
                         @foreach ($users as $index => $user)
                             <tr>
                                 <td>{{ ($users->currentPage() - 1) * $users->perPage() + $loop->iteration }}</td>
-                                <td>{{ $user->username }}</td>
                                 <td>{{ $user->name }}</td>
+                                <td>{{ $user->username }}</td>
+                                <td>{{ $user->role->role }}</td>
                                 <td>{{ $user->email }}</td>
                                 <td>
                                     <!-- Tombol Edit -->
@@ -87,13 +89,26 @@
                                                         value="{{ $user->username }}" required>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label>Role</label>
+                                                    <select class="form-control" name="role_id" required>
+                                                        <option value="" disabled selected>Pilih Role</option>
+                                                        @foreach ($roles as $role)
+                                                            <option value="{{ $role->id }}"
+                                                                {{ $user->role_id == $role->id ? 'selected' : '' }}>
+                                                                {{ $role->role }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Email</label>
                                                     <input type="email" class="form-control" name="email"
                                                         value="{{ $user->email }}" required>
                                                 </div>
                                                 <div class="form-group">
                                                     <label>Password (Opsional)</label>
-                                                    <input type="password" class="form-control" name="password">
+                                                    <input type="password" class="form-control" name="password"
+                                                        placeholder="Kosongkan jika tidak ingin mengubah">
                                                 </div>
                                             </div>
                                             <div class="modal-footer">
@@ -135,6 +150,15 @@
                             <input type="text" class="form-control" name="username" required>
                         </div>
                         <div class="form-group">
+                            <label>Role</label>
+                            <select class="form-control" name="role_id" required>
+                                <option value="" disabled selected>Pilih Role</option>
+                                @foreach ($roles as $role)
+                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label>Email</label>
                             <input type="email" class="form-control" name="email" required>
                         </div>
@@ -151,5 +175,6 @@
             </div>
         </div>
     </div>
+
 
 @endsection

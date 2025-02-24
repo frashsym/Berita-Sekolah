@@ -20,9 +20,15 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'username',
+        'role_id',
         'email',
         'password',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id'); // Pastikan 'role_id' adalah foreign key di tabel users
+    }
 
     /**
      * The attributes that should be hidden for serialization.
