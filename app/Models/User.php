@@ -30,6 +30,12 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class, 'role_id'); // Pastikan 'role_id' adalah foreign key di tabel users
     }
 
+    public function isSuperAdmin()
+    {
+        return $this->role_id == 1; // Sesuaikan dengan ID role Super Admin di database
+    }
+
+
     /**
      * The attributes that should be hidden for serialization.
      *

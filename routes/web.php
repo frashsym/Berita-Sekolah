@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\BeritaController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Index\IndexController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Middleware\SuperAdmin;
 
 // Index User
 Route::get('/', [IndexController::class, 'index'])->name('index');
@@ -42,7 +43,7 @@ Route::prefix('kategori')->middleware(['auth', 'verified'])->group(function () {
 });
     
 // Bagian Admin
-Route::prefix('admin')->middleware(['auth', 'verified'])->group(function () {
+Route::prefix('admin')->middleware(['auth', 'verified', SuperAdmin::class])->group(function () {
     Route::get('/', [AdminController::class, 'index'])->name('admin.index'); // Menampilkan daftar admin
     Route::post('/', [AdminController::class, 'store'])->name('admin.store'); // Membuat data admin baru
     Route::get('/{id}', [AdminController::class, 'show'])->name('admin.show'); // Menampilkan detail admin
