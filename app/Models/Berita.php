@@ -28,4 +28,9 @@ class Berita extends Model
     {
         return $this->belongsTo(Kategori::class, 'kategori_id');
     }
+    
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'berita_id');
+    }
 }
