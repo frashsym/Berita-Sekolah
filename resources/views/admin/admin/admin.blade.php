@@ -11,14 +11,8 @@
             <div class="card-header py-3 d-flex justify-content-between align-items-center">
                 <h6 class="m-0 font-weight-bold text-primary">Tabel Admin</h6>
                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createAdminModal">
-                    <span class="icon text-white-50">
-                        <svg style="height: 20px; width: 20px;" class="mr-1" xmlns="http://www.w3.org/2000/svg"
-                            viewBox="0 0 448 512">
-                            <path fill="#ffffff"
-                                d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z" />
-                        </svg>
-                        Tambah Admin
-                    </span>
+                    <i class="fas fa-plus"></i>
+                    Tambah Admin
                 </button>
             </div>
             <div class="card-body">
@@ -54,7 +48,7 @@
 
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-danger" onclick="hapusAdmin({{ $user->id }})">
-                                        <span class="icon text-white-50"><i class="fas fa-trash"></i></span>
+                                        <i class="fas fa-trash"></i>
                                     </button>
 
                                     <!-- Form Hapus (Disembunyikan) -->

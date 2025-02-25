@@ -15,7 +15,7 @@ class BeritaController extends Controller
     public function index()
     {
         $berita = Berita::with('kategori')->paginate(5);
-        $kategori = Kategori::all(); // Ambil semua kategori dari database
+        $kategori = Kategori::all();
 
         // Cek jika request berasal dari API (Postman)
         if (request()->wantsJson()) {

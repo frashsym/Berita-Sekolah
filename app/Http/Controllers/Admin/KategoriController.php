@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use RealRashid\SweetAlert\Facades\Alert;
 use App\Models\Kategori;
 
 class KategoriController extends Controller
@@ -54,19 +53,6 @@ class KategoriController extends Controller
 
         // Jika dari Web, tampilkan SweetAlert dan redirect
         return redirect()->route('kategori.index')->with('success', 'Kategori berhasil ditambahkan!');
-    }
-
-
-    /**
-     * Menampilkan detail kategori (API).
-     */
-    public function show($id)
-    {
-        $kategori = Kategori::findOrFail($id);
-        return response()->json([
-            'success' => true,
-            'data' => $kategori,
-        ]);
     }
 
     /**
