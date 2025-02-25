@@ -24,9 +24,11 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-5">
                                                     <div class="board">
-                                                        <h3 class="">{{ $berita->judul }}</h3> <!-- Tampilkan judul berita -->
+                                                        <h3 class="">{{ $berita->judul }}</h3>
+                                                        <!-- Tampilkan judul berita -->
                                                         <div class="link_btn">
-                                                            <a class="read_more" href="{{ route('readmore', $berita->id) }}">
+                                                            <a class="read_more"
+                                                                href="{{ route('readmore', $berita->id) }}">
                                                                 Read More<span></span></a>
                                                         </div>
                                                     </div>
@@ -39,7 +41,7 @@
                                                                 alt="{{ $berita->judul }}">
                                                         </figure>
                                                     </div>
-                                                </div>                                                
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -75,16 +77,22 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
-                @foreach ($beritaLainnya as $berita)
-                    <div class="col-md-4 margi_bottom">
-                        <div class="class_box text_align_center">
-                            <i><img src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
-                                    alt="{{ $berita->judul }}" /></i>
-                            <h3>{{ $berita->judul }}</h3>
-                            <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
-                        </div>
-                        <a class="read_more" href="{{ route('readmore', $berita->id) }}">Read More</a>
+                @foreach ($beritaLainnya->chunk(3) as $chunk)
+                    <div class="row {{ count($chunk) < 3 ? 'justify-content-center' : '' }}">
+                        @foreach ($chunk as $berita)
+                            <div class="col-md-4 margi_bottom">
+                                <a class="read_more" href="{{ route('readmore', $berita->id) }}">
+                                    <div class="class_box text_align_center">
+                                        <i><img src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
+                                                alt="{{ $berita->judul }}" /></i>
+                                        <h3>{{ $berita->judul }}</h3>
+                                        <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
+                                    </div>
+                                </a>
+                            </div>
+                        @endforeach
                     </div>
                 @endforeach
             </div>

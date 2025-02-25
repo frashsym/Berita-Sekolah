@@ -12,24 +12,25 @@ class IndexController extends Controller
     public function index()
     {
         // Menggunakan eager loading untuk menghindari N+1 Query Problem
-        $berita = Berita::with('kategori')->get();
         $kategori = Kategori::all();
-        $beritaTerbaru = Berita::latest()->take(2)->get(); // Ambil 2 berita terbaru
-        $beritaLainnya = Berita::latest()->skip(2)->take(3)->get(); // Ambil 3 berita setelah 2 terbaru
+        $beritaTerbaru = Berita::latest()->take(2)->get(); // Ambil 2 berita utama
+        $beritaLainnya = Berita::latest()->skip(2)->paginate(10); // Ambil berita lain (10 per halaman)
 
         // Jika request berasal dari API (Postman atau request JSON)
         if (request()->wantsJson()) {
             return response()->json([
                 'success' => true,
                 'message' => 'Data berita berhasil diambil',
-                'berita' => $berita,
+                'beritaTerbaru' => $beritaTerbaru,
+                'beritaLainnya' => $beritaLainnya,
                 'kategori' => $kategori
             ]);
         }
 
         // Mengirim data ke view dengan compact()
-        return view('index.index', compact('berita', 'kategori', 'beritaTerbaru', 'beritaLainnya'));
+        return view('index.index', compact('beritaTerbaru', 'beritaLainnya', 'kategori'));
     }
+
 
     public function about()
     {
