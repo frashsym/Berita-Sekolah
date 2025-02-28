@@ -38,7 +38,7 @@
                                     <td>{{ $comment->berita->judul ?? 'Tidak Ada' }}</td>
                                     <td>{{ $comment->tanggal_komentar }}</td>
                                     <td>{{ $comment->jam_komentar }}</td>
-                                    <td>
+                                    <td> 
                                         <div class="d-flex gap-2">
                                             <button type="button" class="btn btn-success" data-toggle="modal"
                                                 data-target="#editCommentModal{{ $comment->id }}">
