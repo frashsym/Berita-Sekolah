@@ -35,12 +35,18 @@ class CommentController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'isi_komentar' => 'required|string',
-            'tanggal_komentar' => 'required|date',
-            'jam_komentar' => 'required',
+            'rating' => 'required|max:5',
             'berita_id' => 'required|exists:berita,id',
         ]);
 
-        $comment = Comment::create($request->all());
+        // Tambahkan tanggal dan jam secara otomatis
+        $data = $request->merge([
+            'tanggal_komentar' => now()->setTimezone('Asia/Jakarta')->toDateString(),
+            'jam_komentar' => now()->setTimezone('Asia/Jakarta')->toTimeString(),
+        ])->all();
+
+        // Simpan komentar
+        $comment = Comment::create($data);
 
         if ($request->wantsJson()) {
             return response()->json([
@@ -59,7 +65,7 @@ class CommentController extends Controller
     public function show(Request $request, $id)
     {
         $comment = Comment::with('berita')->findOrFail($id);
-        
+
         if ($request->wantsJson()) {
             return response()->json([
                 'success' => true,

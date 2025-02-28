@@ -24,8 +24,7 @@
                                 <th>Nama</th>
                                 <th>Komentar</th>
                                 <th>Berita</th>
-                                <th>Tanggal</th>
-                                <th>Jam</th>
+                                <th>Rating</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -36,9 +35,8 @@
                                     <td>{{ $comment->nama }}</td>
                                     <td>{{ Str::limit($comment->isi_komentar, 100, '...') }}</td>
                                     <td>{{ $comment->berita->judul ?? 'Tidak Ada' }}</td>
-                                    <td>{{ $comment->tanggal_komentar }}</td>
-                                    <td>{{ $comment->jam_komentar }}</td>
-                                    <td> 
+                                    <td>{{ $comment->rating }}</td>
+                                    <td>
                                         <div class="d-flex gap-2">
                                             <button type="button" class="btn btn-success" data-toggle="modal"
                                                 data-target="#editCommentModal{{ $comment->id }}">
@@ -103,12 +101,8 @@
                                 <textarea class="form-control" name="isi_komentar" rows="4" required></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="tanggal_komentar">Tanggal</label>
-                                <input type="date" class="form-control" name="tanggal_komentar" required>
-                            </div>
-                            <div class="form-group">
-                                <label for="jam_komentar">Jam</label>
-                                <input type="time" class="form-control" name="jam_komentar" required>
+                                <label for="rating">Rating</label>
+                                <input type="number" class="form-control" name="rating" required>
                             </div>
                             <div class="form-group">
                                 <label for="berita_id">Berita</label>
@@ -155,14 +149,9 @@
                                     <textarea class="form-control" name="isi_komentar" rows="4" required>{{ $comment->isi_komentar }}</textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tanggal_komentar">Tanggal</label>
-                                    <input type="date" class="form-control" name="tanggal_komentar"
-                                        value="{{ $comment->tanggal_komentar }}" required>
-                                </div>
-                                <div class="form-group">
-                                    <label for="jam_komentar">Jam</label>
-                                    <input type="time" class="form-control" name="jam_komentar"
-                                        value="{{ $comment->jam_komentar }}" required>
+                                    <label for="rating">Rating</label>
+                                    <input type="number" class="form-control" name="rating"
+                                        value="{{ $comment->rating }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="berita_id">Berita</label>

@@ -17,6 +17,10 @@
                     <p>{{ $comment->isi_komentar }}</p>
                 </div>
                 <div class="mb-3">
+                    <strong>Rating :</strong>
+                    <p>{{ $comment->rating }}</p>
+                </div>
+                <div class="mb-3">
                     <strong>Tanggal Komentar:</strong>
                     {{ \Carbon\Carbon::parse($comment->tanggal_komentar)->format('d M Y') }}
                 </div>

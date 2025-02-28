@@ -96,8 +96,8 @@ class IndexController extends Controller
             'nama' => $request->nama,
             'isi_komentar' => $request->isi_komentar,
             'rating' => $request->rating,
-            'tanggal_komentar' => now()->toDateString(),
-            'jam_komentar' => now()->toTimeString(),
+            'tanggal_komentar' => now()->setTimezone('Asia/Jakarta')->toDateString(),
+            'jam_komentar' => now()->setTimezone('Asia/Jakarta')->toTimeString(),
             'berita_id' => $request->berita_id,
         ]);
 
