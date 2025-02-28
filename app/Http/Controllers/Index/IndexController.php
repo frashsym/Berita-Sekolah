@@ -15,7 +15,7 @@ class IndexController extends Controller
         // Menggunakan eager loading untuk menghindari N+1 Query Problem
         $kategori = Kategori::all();
         $beritaTerbaru = Berita::latest()->take(2)->get(); // Ambil 2 berita utama
-        $beritaLainnya = Berita::latest()->skip(2)->paginate(10); // Ambil berita lain (10 per halaman)
+        $beritaLainnya = Berita::latest()->skip(2)->paginate(6); // Ambil berita lain (10 per halaman)
 
         // Jika request berasal dari API (Postman atau request JSON)
         if (request()->wantsJson()) {
@@ -30,6 +30,32 @@ class IndexController extends Controller
 
         // Mengirim data ke view dengan compact()
         return view('index.index', compact('beritaTerbaru', 'beritaLainnya', 'kategori'));
+    }
+
+    public function loadMore(Request $request)
+    {
+        try {
+            $page = $request->input('page', 1);
+            $beritaLainnya = Berita::latest()->skip(2)->paginate(6, ['*'], 'page', $page + 1);
+
+            if ($beritaLainnya->isEmpty()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Tidak ada berita lagi'
+                ]);
+            }
+
+            return response()->json([
+                'success' => true,
+                'data' => view('index.partials.berita-list', compact('beritaLainnya'))->render(),
+                'nextPage' => $beritaLainnya->hasMorePages() ? $page + 1 : null
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error: ' . $e->getMessage()
+            ], 500);
+        }
     }
 
 

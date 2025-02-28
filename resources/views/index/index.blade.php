@@ -78,25 +78,69 @@
                 </div>
             </div>
 
-            <div class="row">
-                @foreach ($beritaLainnya->chunk(3) as $chunk)
-                    <div class="row {{ count($chunk) < 3 ? 'justify-content-center' : '' }}">
-                        @foreach ($chunk as $berita)
-                            <div class="col-md-4 margi_bottom">
-                                <a class="read_more" href="{{ route('readmore', $berita->id) }}">
-                                    <div class="class_box text_align_center">
-                                        <i><img src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
-                                                alt="{{ $berita->judul }}" /></i>
-                                        <h3>{{ $berita->judul }}</h3>
-                                        <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
-                                    </div>
-                                </a>
+            <div class="row" id="beritaContainer">
+                @foreach ($beritaLainnya as $berita)
+                    <div class="col-md-4 margi_bottom">
+                        <a class="read_more" href="{{ route('readmore', $berita->id) }}">
+                            <div class="class_box text_align_center">
+                                <i><img src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
+                                        alt="{{ $berita->judul }}" /></i>
+                                <h3>{{ $berita->judul }}</h3>
+                                <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
                             </div>
-                        @endforeach
+                        </a>
                     </div>
                 @endforeach
+            </div>
+
+            <div class="link_btn">
+                <a class="read_more" id="loadMoreBtn" data-page="1">
+                    Lihat lebih<span></span>
+                </a>
             </div>
         </div>
     </div>
     <!-- End Berita Lainnya -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('#loadMoreBtn').on('click', function(e) {
+                e.preventDefault();
+
+                let button = $(this);
+                let page = button.data('page');
+
+                $.ajax({
+                    url: "{{ route('berita.more') }}",
+                    type: "GET",
+                    data: {
+                        page: page
+                    },
+                    beforeSend: function() {
+                        button.text('Memuat...');
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            $('#beritaContainer').append(response.data);
+
+                            if (response.nextPage) {
+                                button.data('page', response.nextPage);
+                                button.text('Lihat lebih');
+                            } else {
+                                button
+                                    .remove(); // Hapus tombol jika sudah tidak ada berita lagi
+                            }
+                        } else {
+                            alert('Gagal memuat berita');
+                        }
+                    },
+                    error: function() {
+                        alert('Terjadi kesalahan, coba lagi.');
+                    }
+                });
+            });
+        });
+    </script>
+
 @endsection
