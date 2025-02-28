@@ -19,6 +19,7 @@ class CommentSeeder extends Seeder
                 'isi_komentar' => 'Artikel ini sangat bermanfaat!',
                 'tanggal_komentar' => Carbon::now()->toDateString(),
                 'jam_komentar' => Carbon::now()->toTimeString(),
+                'rating' => 5,
                 'berita_id' => 1,
             ],
             [
@@ -26,6 +27,7 @@ class CommentSeeder extends Seeder
                 'isi_komentar' => 'Saya sangat setuju dengan pendapat ini.',
                 'tanggal_komentar' => Carbon::now()->subDay()->toDateString(),
                 'jam_komentar' => Carbon::now()->subHour()->toTimeString(),
+                'rating' => 5,
                 'berita_id' => 2,
             ],
             [
@@ -33,6 +35,7 @@ class CommentSeeder extends Seeder
                 'isi_komentar' => 'Berita yang menarik untuk dibaca.',
                 'tanggal_komentar' => Carbon::now()->subDays(2)->toDateString(),
                 'jam_komentar' => Carbon::now()->subHours(2)->toTimeString(),
+                'rating' => 5,
                 'berita_id' => 3,
             ],
             [
@@ -40,6 +43,7 @@ class CommentSeeder extends Seeder
                 'isi_komentar' => 'Terima kasih telah berbagi informasi ini.',
                 'tanggal_komentar' => Carbon::now()->subDays(3)->toDateString(),
                 'jam_komentar' => Carbon::now()->subHours(3)->toTimeString(),
+                'rating' => 5,
                 'berita_id' => 1,
             ],
             [
@@ -47,6 +51,7 @@ class CommentSeeder extends Seeder
                 'isi_komentar' => 'Saya memiliki pandangan berbeda, tetapi ini menarik!',
                 'tanggal_komentar' => Carbon::now()->subDays(4)->toDateString(),
                 'jam_komentar' => Carbon::now()->subHours(4)->toTimeString(),
+                'rating' => 5,
                 'berita_id' => 2,
             ],
         ]);

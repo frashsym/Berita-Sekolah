@@ -1108,5 +1108,27 @@ ul.social_icon li a:hover {
      opacity: 1;
 }
 
+.rating {
+     display: flex;
+     flex-direction: row-reverse;
+     justify-content: center;
+ }
+
+ .rating input {
+     display: none;
+ }
+
+ .rating label {
+     font-size: 2rem;
+     color: gray;
+     cursor: pointer;
+ }
+
+ .rating input:checked~label,
+ .rating label:hover,
+ .rating label:hover~label {
+     color: gold;
+ }
+
 
 /** end contact **/

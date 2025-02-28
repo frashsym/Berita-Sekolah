@@ -13,6 +13,7 @@ class Comment extends Model
 
     protected $fillable = [
         'nama',
+        'rating',
         'isi_komentar',
         'tanggal_komentar',
         'jam_komentar',

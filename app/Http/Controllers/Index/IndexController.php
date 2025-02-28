@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Index;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Kategori;
+use App\Models\Comment;
 use App\Models\Berita;
 
 class IndexController extends Controller
@@ -51,6 +52,34 @@ class IndexController extends Controller
 
         // Kembalikan tampilan halaman readmore
         return view('index.readmore', compact('berita'));
+    }
+
+    /**
+     * Menyimpan komentar dari user (API & Web).
+     */
+    public function komentar(Request $request)
+    {
+        $request->validate([
+            'nama' => 'required|string|max:255',
+            'isi_komentar' => 'required|string',
+            'rating' => 'nullable|integer|min:1|max:5',
+            'berita_id' => 'required|exists:berita,id',
+        ]);
+
+        $comment = Comment::create([
+            'nama' => $request->nama,
+            'isi_komentar' => $request->isi_komentar,
+            'rating' => $request->rating,
+            'tanggal_komentar' => now()->toDateString(),
+            'jam_komentar' => now()->toTimeString(),
+            'berita_id' => $request->berita_id,
+        ]);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Komentar berhasil ditambahkan.',
+            'data' => $comment,
+        ]);
     }
 
     public function kategori()
