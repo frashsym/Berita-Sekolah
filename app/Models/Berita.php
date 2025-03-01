@@ -18,6 +18,7 @@ class Berita extends Model
         'jam_publikasi',
         'penulis',
         'kategori_id',
+        'rating',
         'gambar_utama',
     ];
 

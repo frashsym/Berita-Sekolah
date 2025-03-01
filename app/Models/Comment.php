@@ -27,4 +27,26 @@ class Comment extends Model
     {
         return $this->belongsTo(Berita::class, 'berita_id');
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::created(function ($comment) {
+            $comment->updateBeritaRating();
+        });
+
+        static::deleted(function ($comment) {
+            $comment->updateBeritaRating();
+        });
+    }
+
+    public function updateBeritaRating()
+    {
+        $berita = $this->berita;
+        if ($berita) {
+            $averageRating = $berita->comments()->avg('rating');
+            $berita->update(['rating' => $averageRating]);
+        }
+    }
 }

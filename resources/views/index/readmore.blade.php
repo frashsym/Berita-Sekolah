@@ -27,6 +27,17 @@
                         <br>
                         <span>{{ $berita->tanggal_publikasi }}</span>
                         <span>{{ $berita->jam_publikasi }}</span>
+                    <div class="average-rating">
+                        <strong>Rata-rata Rating:</strong>
+                        @for ($i = 1; $i <= 5; $i++)
+                            @if ($i <= round($berita->rating))
+                                <span class="star-rating">&#9733;</span> <!-- Filled star -->
+                            @else
+                                <span class="star-rating">&#9734;</span> <!-- Empty star -->
+                            @endif
+                        @endfor
+                        ({{ number_format($berita->rating) }} / 5)
+                    </div>
                     </p>
                 </div>
                 <form id="commentForm" class="form_subscri" action="{{ route('komentar') }}" method="POST">
