@@ -87,8 +87,8 @@ class IndexController extends Controller
     {
         $request->validate([
             'nama' => 'required|string|max:255',
-            'isi_komentar' => 'required|string',
-            'rating' => 'nullable|integer|min:1|max:5',
+            'isi_komentar' => 'nullable|string|max:255',
+            'rating' => 'required|integer|min:1|max:5',
             'berita_id' => 'required|exists:berita,id',
         ]);
 

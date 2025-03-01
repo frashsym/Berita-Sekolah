@@ -35,7 +35,7 @@ class CommentController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'isi_komentar' => 'required|string',
-            'rating' => 'required|max:5',
+            'rating' => 'integer|min:1|max:5',
             'berita_id' => 'required|exists:berita,id',
         ]);
 
@@ -84,6 +84,7 @@ class CommentController extends Controller
         $request->validate([
             'nama' => 'required|string|max:255',
             'isi_komentar' => 'required|string',
+            'rating' => 'integer|min:1|max:5',
             'tanggal_komentar' => 'required|date',
             'jam_komentar' => 'required',
             'berita_id' => 'required|exists:berita,id',

@@ -1,6 +1,6 @@
 @extends('layouts.index.app')
 
-@section('title', 'Read More - ' . $berita->judul)
+@section('title', 'Baca - ' . $berita->judul)
 
 @section('content')
 
@@ -78,8 +78,22 @@
                         <div class="comment-box">
                             <strong>{{ $comment->nama }}</strong>
                             <span>({{ $comment->tanggal_komentar }} - {{ $comment->jam_komentar }})</span>
-                            <p>{{ $comment->isi_komentar }}</p>
-                            <p>Rating: {{ $comment->rating ?? 'Tidak ada rating' }}</p>
+                            @if ($comment->isi_komentar)
+                                <p>{{ $comment->isi_komentar }}</p>
+                            @endif
+                            <div class="star-rating">
+                                @if ($comment->rating)
+                                    @for ($i = 1; $i <= 5; $i++)
+                                        @if ($i <= $comment->rating)
+                                            &#9733; <!-- Filled star -->
+                                        @else
+                                            &#9734; <!-- Empty star -->
+                                        @endif
+                                    @endfor
+                                @else
+                                    <p>Tidak ada rating</p>
+                                @endif
+                            </div>
                             <hr>
                         </div>
                     @endforeach
@@ -90,6 +104,7 @@
     <!-- End Berita Detail -->
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
         $(document).ready(function() {
@@ -101,7 +116,7 @@
                 $.ajax({
                     url: $(this).attr('action'),
                     method: 'POST',
-                    data: $(this).serialize(),
+                    data: formData,
                     success: function(response) {
                         if (response.success) {
 
@@ -116,24 +131,46 @@
                             // Kosongkan form setelah berhasil
                             $('#commentForm')[0].reset();
 
+                            // Buat elemen rating bintang
+                            let starRating = '';
+                            if (response.data.rating) {
+                                for (let i = 1; i <= 5; i++) {
+                                    if (i <= response.data.rating) {
+                                        starRating += '&#9733; '; // Filled star
+                                    } else {
+                                        starRating += '&#9734; '; // Empty star
+                                    }
+                                }
+                            } else {
+                                starRating = '<p>Tidak ada rating</p>';
+                            }
+
                             // Tambahkan komentar baru ke daftar komentar tanpa reload
                             $('#commentList').prepend(`
-                        <div class="comment-box">
-                            <strong>${response.data.nama}</strong> 
-                            <span>(${response.data.tanggal_komentar} - ${response.data.jam_komentar})</span>
-                            <p>${response.data.isi_komentar}</p>
-                            <p>Rating: ${response.data.rating ?? 'Tidak ada rating'}</p>
-                            <hr>
-                        </div>
-                    `);
+                                <div class="comment-box">
+                                    <div class="comment-header" style="display: flex; align-items: center; gap: 10px;">
+                                        <strong>${response.data.nama}</strong> 
+                                        <span>(${response.data.tanggal_komentar} - ${response.data.jam_komentar})</span>
+                                    <div class="star-rating">${starRating}</div>
+                                    </div>
+                                <p>${response.data.isi_komentar ? response.data.isi_komentar : ''}</p>
+                                <hr>
+                                </div>
+                        `);
                         } else {
-                            alert('Terjadi kesalahan, coba lagi.');
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: 'Terjadi kesalahan, coba lagi.'
+                            });
                         }
                     },
                     error: function(xhr) {
-                        alert(
-                            'Gagal mengirim komentar. Pastikan semua data terisi dengan benar.'
-                        );
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Gagal!',
+                            text: 'Wajib memberikan rating.'
+                        });
                     }
                 });
             });

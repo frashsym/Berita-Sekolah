@@ -29,7 +29,7 @@
                                                         <div class="link_btn">
                                                             <a class="read_more"
                                                                 href="{{ route('readmore', $berita->id) }}">
-                                                                Read More<span></span></a>
+                                                                Baca lagi<span></span></a>
                                                         </div>
                                                     </div>
                                                 </div>

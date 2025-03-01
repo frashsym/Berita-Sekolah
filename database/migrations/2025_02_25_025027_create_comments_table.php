@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->string('nama');
-            $table->text('isi_komentar');
+            $table->text('isi_komentar')->nullable();
             $table->date('tanggal_komentar');
             $table->time('jam_komentar');
             $table->foreignId('berita_id')->constrained('berita')->onDelete('cascade');
