@@ -15,6 +15,7 @@ use App\Http\Middleware\SuperAdmin;
 Route::get('/', [IndexController::class, 'index'])->name('index');
 Route::get('/about', [IndexController::class, 'about'])->name('about');
 Route::get('/readmore/{id}', [IndexController::class, 'readmore'])->name('readmore');
+Route::get('/search', [IndexController::class, 'search'])->name('berita.search');
 Route::get('/berita/more', [IndexController::class, 'loadMore'])->name('berita.more');
 Route::post('/komentar', [IndexController::class, 'komentar'])->name('komentar');
 Route::get('/kategori/berita', [IndexController::class, 'kategori'])->name('kategori.berita');

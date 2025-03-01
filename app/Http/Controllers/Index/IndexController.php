@@ -111,6 +111,31 @@ class IndexController extends Controller
         ]);
     }
 
+    public function search(Request $request)
+    {
+        $query = $request->input('query');
+
+        // Cari kategori yang sesuai
+        $kategori = Kategori::where('kategori', 'LIKE', "%{$query}%")->first();
+
+        // Cari berita berdasarkan judul atau isi berita
+        $berita = Berita::where('judul', 'LIKE', "%{$query}%")
+            ->orWhere('isi_berita', 'LIKE', "%{$query}%")
+            ->get();
+
+        if ($kategori) {
+            // Jika ditemukan kategori, cari berita dalam kategori itu
+            $beritaDalamKategori = Berita::where('kategori_id', $kategori->id)->get();
+            return view('index.search.kategori', compact('kategori', 'beritaDalamKategori', 'query'));
+        } elseif ($berita->isNotEmpty()) {
+            // Jika ditemukan berita, tampilkan daftar berita
+            return view('index.search.berita', compact('berita', 'query'));
+        } else {
+            // Jika tidak ada hasil, tampilkan halaman dengan pesan
+            return view('index.search.berita', ['berita' => [], 'query' => $query]);
+        }
+    }
+
     public function kategori()
     {
         $kategoris = Kategori::get();

@@ -35,7 +35,7 @@
                                                         <div class="link_btn">
                                                             <a class="read_more"
                                                                 href="{{ route('readmore', $berita->id) }}">
-                                                                Baca lagi<span></span>
+                                                                Lihat lebih<span></span>
                                                             </a>
                                                         </div>
                                                     </div>
@@ -75,6 +75,7 @@
         </div>
     </div>
     <!-- end banner -->
+    
     <!-- Berita Lainnya -->
     <div class="class">
         <div class="container">
