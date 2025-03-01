@@ -21,7 +21,13 @@
                         style="width: 350px; height: 450px;" alt="{{ $berita->judul }}" />
                     <p class="mt-3 text-center">{{ $berita->isi_berita }}</p> <!-- Pastikan teks juga rata tengah -->
                     <br><br>
-                    <p><strong>Penulis: </strong>{{ $berita->penulis }}</p>
+                    <p>
+                        <strong>{{ $berita->penulis }}</strong>
+                        <br>
+                        <br>
+                        <span>{{ $berita->tanggal_publikasi }}</span>
+                        <span>{{ $berita->jam_publikasi }}</span>
+                    </p>
                 </div>
                 <form id="commentForm" class="form_subscri" action="{{ route('komentar') }}" method="POST">
                     @csrf

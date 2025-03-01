@@ -23,9 +23,7 @@
                 <div class="mb-3">
                     <strong>Tanggal Komentar:</strong>
                     {{ \Carbon\Carbon::parse($comment->tanggal_komentar)->format('d M Y') }}
-                </div>
-                <div class="mb-3">
-                    <strong>Jam Komentar:</strong> {{ \Carbon\Carbon::parse($comment->jam_komentar)->format('H:i') }}
+                    {{ \Carbon\Carbon::parse($comment->jam_komentar)->format('H:i') }}
                 </div>
                 <div class="mb-3">
                     <strong>Berita Terkait:</strong> 

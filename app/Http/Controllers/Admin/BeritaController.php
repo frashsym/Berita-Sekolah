@@ -34,55 +34,61 @@ class BeritaController extends Controller
      * Menyimpan berita baru (API).
      */
     public function store(Request $request)
-    {
-        // Validasi input
-        $request->validate([
-            'judul' => 'required|string|max:255|',
-            'isi_berita' => 'required|string',
-            'tanggal_publikasi' => 'required|date',
-            'penulis' => 'required|string|max:255',
-            'kategori_id' => 'required|exists:kategori,id',
-            'gambar_utama' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-        ]);
+{
+    // Validasi input
+    $request->validate([
+        'judul' => 'required|string|max:255',
+        'isi_berita' => 'required|string',
+        'penulis' => 'required|string|max:255',
+        'kategori_id' => 'required|exists:kategori,id',
+        'gambar_utama' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+    ]);
 
-        // Proses upload gambar jika ada
-        if ($request->hasFile('gambar_utama')) {
-            $file = $request->file('gambar_utama');
+    // Proses upload gambar jika ada
+    if ($request->hasFile('gambar_utama')) {
+        $file = $request->file('gambar_utama');
 
-            // Ambil ekstensi file asli
-            $extension = $file->getClientOriginalExtension();
+        // Ambil ekstensi file asli
+        $extension = $file->getClientOriginalExtension();
 
-            // Buat nama file baru dengan format [timestamp]_originalFileName.ext
-            $fileName = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $extension;
+        // Buat nama file baru dengan format [timestamp]_originalFileName.ext
+        $fileName = time() . '_' . pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . '.' . $extension;
 
-            // Pindahkan file ke folder penyimpanan
-            $file->move(public_path('images/berita'), $fileName);
-        } else {
-            $fileName = null;
-        }
-
-        // Simpan data berita ke database
-        $berita = Berita::create([
-            'judul' => $request->judul,
-            'isi_berita' => $request->isi_berita,
-            'tanggal_publikasi' => $request->tanggal_publikasi,
-            'penulis' => $request->penulis,
-            'kategori_id' => $request->kategori_id,
-            'gambar_utama' => $fileName, // Simpan nama file dengan format yang diinginkan
-        ]);
-
-        // Jika request dari API (Postman)
-        if ($request->wantsJson()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Berita berhasil ditambahkan.',
-                'data' => $berita,
-            ], 201);
-        }
-
-        // Jika dari Web, tampilkan SweetAlert dan redirect
-        return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
+        // Pindahkan file ke folder penyimpanan
+        $file->move(public_path('images/berita'), $fileName);
+    } else {
+        $fileName = null;
     }
+
+    // Tambahkan tanggal dan jam secara otomatis
+    $data = $request->merge([
+        'tanggal_publikasi' => now()->setTimezone('Asia/Jakarta')->toDateString(),
+        'jam_publikasi' => now()->setTimezone('Asia/Jakarta')->toTimeString(),
+    ])->all();
+
+    // Simpan data berita ke database
+    $berita = Berita::create([
+        'judul' => $data['judul'],
+        'isi_berita' => $data['isi_berita'],
+        'tanggal_publikasi' => $data['tanggal_publikasi'],
+        'jam_publikasi' => $data['jam_publikasi'],
+        'penulis' => $data['penulis'],
+        'kategori_id' => $data['kategori_id'],
+        'gambar_utama' => $fileName, // Simpan nama file dengan format yang diinginkan
+    ]);
+
+    // Jika request dari API (Postman)
+    if ($request->wantsJson()) {
+        return response()->json([
+            'success' => true,
+            'message' => 'Berita berhasil ditambahkan.',
+            'data' => $berita,
+        ], 201);
+    }
+
+    // Jika dari Web, tampilkan SweetAlert dan redirect
+    return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan!');
+}
 
     /**
      * Menampilkan detail berita (API).
@@ -112,6 +118,7 @@ class BeritaController extends Controller
             'judul' => 'required|string|max:255|unique:berita,judul,' . $id,
             'isi_berita' => 'required|string',
             'tanggal_publikasi' => 'required|date',
+            'jam_publikasi' => 'required|date_format:H:i:s',
             'penulis' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori,id',
             'gambar_utama' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
@@ -147,6 +154,7 @@ class BeritaController extends Controller
             'judul' => $request->judul,
             'isi_berita' => $request->isi_berita,
             'tanggal_publikasi' => $request->tanggal_publikasi,
+            'jam_publikasi' => $request->jam_publikasi,
             'penulis' => $request->penulis,
             'kategori_id' => $request->kategori_id,
             'gambar_utama' => $berita->gambar_utama,

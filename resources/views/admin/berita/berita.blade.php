@@ -31,7 +31,6 @@
                                 <th>Isi Berita</th>
                                 <th>Kategori Berita</th>
                                 <th>Penulis Berita</th>
-                                <th>Tanggal Publikasi</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -43,7 +42,6 @@
                                     <td>{{ Str::limit($item->isi_berita, 100, '...') }}</td>
                                     <td>{{ $item->kategori->kategori ?? 'Tidak Ada' }}</td>
                                     <td>{{ $item->penulis }}</td>
-                                    <td>{{ $item->tanggal_publikasi }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
                                             <!-- Tombol Edit -->
@@ -111,11 +109,6 @@
                                     <textarea class="form-control" id="isi_berita" name="isi_berita" rows="4" required></textarea>
                                 </div>
                                 <div class="form-group">
-                                    <label for="tanggal_publikasi">Tanggal Publikasi</label>
-                                    <input type="date" class="form-control" id="tanggal_publikasi"
-                                        name="tanggal_publikasi" required>
-                                </div>
-                                <div class="form-group">
                                     <label for="penulis">Penulis</label>
                                     <input type="text" class="form-control" id="penulis" name="penulis" required>
                                 </div>
@@ -173,6 +166,12 @@
                                         <input type="date" class="form-control" id="tanggal_publikasi"
                                             name="tanggal_publikasi"
                                             value="{{ old('tanggal_publikasi', $item->tanggal_publikasi) }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="jam_publikasi">Jam Publikasi</label>
+                                        <input type="time" step="1" class="form-control" id="jam_publikasi"
+                                            name="jam_publikasi" value="{{ old('jam_publikasi', $item->jam_publikasi) }}"
+                                            required>
                                     </div>
                                     <div class="form-group">
                                         <label for="penulis">Penulis</label>

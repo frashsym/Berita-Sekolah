@@ -36,7 +36,9 @@
                                                 <div class="col-md-7 d-flex flex-column">
                                                     <div class="banner_img">
                                                         <figure class="d-flex flex-column align-items-end mr-5">
-                                                            <img class="img_responsive" style="width: 500px; height: 600px;"
+                                                            <br><br>
+                                                            <img class="img_responsive"
+                                                                style="max-width: 60%; height: 60%; object-fit: cover;"
                                                                 src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
                                                                 alt="{{ $berita->judul }}">
                                                         </figure>

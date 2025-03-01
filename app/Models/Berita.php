@@ -15,6 +15,7 @@ class Berita extends Model
         'judul',
         'isi_berita',
         'tanggal_publikasi',
+        'jam_publikasi',
         'penulis',
         'kategori_id',
         'gambar_utama',

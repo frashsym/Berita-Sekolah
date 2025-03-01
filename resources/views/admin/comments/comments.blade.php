@@ -154,6 +154,16 @@
                                         value="{{ $comment->rating }}" required>
                                 </div>
                                 <div class="form-group">
+                                    <label for="tanggal_komentar">Tanggal Komentar</label>
+                                    <input type="date" class="form-control" name="tanggal_komentar"
+                                        value="{{ $comment->tanggal_komentar }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="jam_komentar">Jam Komentar</label>
+                                    <input type="time" step="1" class="form-control" name="jam_komentar"
+                                        value="{{ $comment->jam_komentar }}" required>
+                                </div>
+                                <div class="form-group">
                                     <label for="berita_id">Berita</label>
                                     <select class="form-control" name="berita_id" required>
                                         @foreach ($berita as $item)

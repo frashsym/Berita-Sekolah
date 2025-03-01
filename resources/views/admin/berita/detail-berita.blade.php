@@ -24,6 +24,7 @@
                 <div class="mb-3">
                     <strong>Tanggal Publikasi:</strong>
                     {{ \Carbon\Carbon::parse($berita->tanggal_publikasi)->format('d M Y') }}
+                    {{ \Carbon\Carbon::parse($berita->jam_publikasi)->format('H:i') }}
                 </div>
                 <div class="mb-3">
                     <strong>Isi Berita:</strong>
