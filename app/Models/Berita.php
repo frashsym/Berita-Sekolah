@@ -20,6 +20,7 @@ class Berita extends Model
         'kategori_id',
         'rating',
         'gambar_utama',
+        'views',
     ];
 
     /**

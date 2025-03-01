@@ -121,6 +121,7 @@ class BeritaController extends Controller
             'jam_publikasi' => 'required|date_format:H:i:s',
             'penulis' => 'required|string|max:255',
             'kategori_id' => 'required|exists:kategori,id',
+            'views' => 'nullable|integer',
             'gambar_utama' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
@@ -157,6 +158,7 @@ class BeritaController extends Controller
             'jam_publikasi' => $request->jam_publikasi,
             'penulis' => $request->penulis,
             'kategori_id' => $request->kategori_id,
+            'views' => $request->views,
             'gambar_utama' => $berita->gambar_utama,
         ]);
 

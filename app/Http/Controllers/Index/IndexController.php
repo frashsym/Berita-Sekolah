@@ -68,6 +68,9 @@ class IndexController extends Controller
     {
         $berita = Berita::with('kategori')->findOrFail($id);
 
+        // Tambahkan view setiap kali berita dibuka
+        $berita->increment('views');
+
         // Jika permintaan berasal dari API (Postman atau AJAX), kembalikan JSON
         if ($request->wantsJson()) {
             return response()->json([

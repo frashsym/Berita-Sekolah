@@ -22,13 +22,13 @@
                     <p class="mt-3 text-center">{{ $berita->isi_berita }}</p> <!-- Pastikan teks juga rata tengah -->
                     <br><br>
                     <p>
-                        <strong>{{ $berita->penulis }}</strong>
+                        <strong>{{ $berita->penulis }}</strong><br>
                         <br>
                         <br>
+                        <span>Dilihat: {{ $berita->views }}</span><br>
                         <span>{{ $berita->tanggal_publikasi }}</span>
                         <span>{{ $berita->jam_publikasi }}</span>
                     <div class="average-rating">
-                        <strong>Rata-rata Rating:</strong>
                         @for ($i = 1; $i <= 5; $i++)
                             @if ($i <= round($berita->rating))
                                 <span class="star-rating">&#9733;</span> <!-- Filled star -->
@@ -41,9 +41,12 @@
                     </p>
                 </div>
                 <form id="commentForm" class="form_subscri" action="{{ route('komentar') }}" method="POST">
+                    <br><br>
                     @csrf
                     <input type="hidden" name="berita_id" value="{{ $berita->id }}">
 
+                    <h1><strong>Berikan ulasan Anda</strong></h1>
+                    
                     <div class="row justify-content-center text-center">
                         <div class="col-md-12">
                             <br><br><br>

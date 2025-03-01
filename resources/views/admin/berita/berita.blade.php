@@ -31,6 +31,7 @@
                                 <th>Isi Berita</th>
                                 <th>Kategori Berita</th>
                                 <th>Penulis Berita</th>
+                                <th>Views</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -42,6 +43,7 @@
                                     <td>{{ Str::limit($item->isi_berita, 100, '...') }}</td>
                                     <td>{{ $item->kategori->kategori ?? 'Tidak Ada' }}</td>
                                     <td>{{ $item->penulis }}</td>
+                                    <td>{{ $item->views }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
                                             <!-- Tombol Edit -->
@@ -177,6 +179,11 @@
                                         <label for="penulis">Penulis</label>
                                         <input type="text" class="form-control" id="penulis" name="penulis"
                                             value="{{ old('penulis', $item->penulis) }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="views">Views</label>
+                                        <input type="number" class="form-control" id="views" name="views"
+                                            value="{{ old('views', $item->views) }}">
                                     </div>
                                     <div class="form-group">
                                         <label for="kategori_id">Kategori</label>
