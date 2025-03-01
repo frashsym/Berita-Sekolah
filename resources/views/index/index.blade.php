@@ -24,12 +24,19 @@
                                             <div class="row d_flex">
                                                 <div class="col-md-5">
                                                     <div class="board">
-                                                        <h3 class="">{{ $berita->judul }}</h3>
                                                         <!-- Tampilkan judul berita -->
+                                                        <h3 class="">{{ $berita->judul }}</h3>
+
+                                                        <!-- Tambahkan informasi waktu pembuatan -->
+                                                        <p class="text-muted">
+                                                            {{ \Carbon\Carbon::parse($berita->created_at)->setTimezone('Asia/Jakarta')->locale('id')->diffForHumans() }}
+                                                        </p>
+                                                        <br>
                                                         <div class="link_btn">
                                                             <a class="read_more"
                                                                 href="{{ route('readmore', $berita->id) }}">
-                                                                Baca lagi<span></span></a>
+                                                                Baca lagi<span></span>
+                                                            </a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -89,6 +96,10 @@
                                         alt="{{ $berita->judul }}" /></i>
                                 <h3>{{ $berita->judul }}</h3>
                                 <p>{{ Str::limit($berita->isi_berita, 100) }}</p>
+                                <br>
+                                <p class="mt-2" style="color: #f0f0f0; font-size: 14px; font-style: italic;">
+                                    {{ \Carbon\Carbon::parse($berita->created_at)->setTimezone('Asia/Jakarta')->locale('id')->diffForHumans() }}
+                                </p>
                             </div>
                         </a>
                     </div>

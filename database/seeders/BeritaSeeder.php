@@ -35,6 +35,8 @@ class BeritaSeeder extends Seeder
                 'penulis' => 'Admin NeperTimes',
                 'kategori_id' => $i % 4 + 1,
                 'gambar_utama' => 'ijazah.jpeg',
+                'created_at' => $now->copy()->subDays($i),
+                'updated_at' => $now->copy()->subDays($i),
             ];
         }
 
@@ -49,6 +51,8 @@ class BeritaSeeder extends Seeder
                 'penulis' => 'Admin NeperTimes',
                 'kategori_id' => rand(1, 4), // Pastikan kategori tersedia di database
                 'gambar_utama' => 'ijazah.jpeg',
+                'created_at' => $randomDate,
+                'updated_at' => $randomDate,
             ];
         }
 
