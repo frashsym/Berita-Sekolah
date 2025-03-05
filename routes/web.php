@@ -28,6 +28,8 @@ Route::post('/logout', [AuthenticatedSessionController::class, 'destroy']);
 
 // Bagian Dashboard
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/profile/{id}', [DashboardController::class, 'profile'])->middleware(['auth', 'verified'])->name('profile');
+Route::put('/profile/update/{id}', [DashboardController::class, 'updateProfile'])->name('profile.update');
 
 // Bagian Berita
 Route::prefix('berita')->middleware(['auth', 'verified'])->group(function () {
@@ -42,7 +44,7 @@ Route::prefix('berita')->middleware(['auth', 'verified'])->group(function () {
 Route::prefix('kategori')->middleware(['auth', 'verified'])->group(function () {
     Route::get('/', [KategoriController::class, 'index'])->name('kategori.index'); // Menampilkan daftar kategori
     Route::post('/', [KategoriController::class, 'store'])->name('kategori.store'); // Membuat data kategori baru
-    Route::get('/{id}', [KategoriController::class, 'show'])->name('kategori.show'); // Menampilkan detail kategori
+    // Route::get('/{id}', [KategoriController::class, 'show'])->name('kategori.show'); // Menampilkan detail kategori
     Route::put('/{id}', [KategoriController::class, 'update'])->name('kategori.update'); // Mengedit data kategori
     Route::delete('/{id}', [KategoriController::class, 'delete'])->name('kategori.delete'); // Menghapus data kategori
 });
@@ -69,9 +71,9 @@ Route::prefix('admin')->middleware(['auth', 'verified', SuperAdmin::class])->gro
 Route::prefix('role')->middleware(['auth', 'verified', SuperAdmin::class])->group(function () {
     Route::get('/', [RoleController::class, 'index'])->name('role.index'); // Menampilkan daftar role
     Route::post('/', [RoleController::class, 'store'])->name('role.store'); // Membuat data role baru
-    Route::get('/{id}', [RoleController::class, 'show'])->name('role.show'); // Menampilkan detail role
+    // Route::get('/{id}', [RoleController::class, 'show'])->name('role.show'); // Menampilkan detail role
     Route::put('/{id}', [RoleController::class, 'update'])->name('role.update'); // Mengedit data role
     Route::delete('/{id}', [RoleController::class, 'delete'])->name('role.delete'); // Menghapus data role
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

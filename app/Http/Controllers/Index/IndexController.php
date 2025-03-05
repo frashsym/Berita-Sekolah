@@ -132,7 +132,7 @@ class IndexController extends Controller
             return view('index.search.berita', compact('berita', 'query'));
         } else {
             // Jika tidak ada hasil, tampilkan halaman dengan pesan
-            return view('index.search.berita', ['berita' => [], 'query' => $query]);
+            return view('index.search.berita', ['berita' => collect([]), 'query' => $query]);
         }
     }
 

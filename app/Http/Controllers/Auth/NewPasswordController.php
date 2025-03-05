@@ -35,6 +35,10 @@ class NewPasswordController extends Controller
     {
         $request->validate([
             'password' => ['required', 'confirmed', 'min:8'],
+        ], [
+            'password.required' => 'Password wajib diisi.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+            'password.min' => 'Password minimal harus terdiri dari 8 karakter.',
         ]);
 
         // Ambil email dari session

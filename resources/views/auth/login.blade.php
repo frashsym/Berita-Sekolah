@@ -13,7 +13,7 @@
 <body class="bg-gradient-to-r from-blue-400 to-purple-500 flex items-center justify-center h-screen">
     <div class="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <div class="text-center mb-6">
-            <h1 class="text-2xl font-bold text-gray-900">Welcome Back!</h1>
+            <h1 class="text-2xl font-bold text-gray-900">Selamat Datang Kembali!</h1>
         </div>
         <form id="loginForm">
             <div class="mb-4">
@@ -23,7 +23,7 @@
                 <p id="emailError" class="text-red-500 text-sm mt-2"></p>
             </div>
             <div class="mb-4">
-                <label for="password" class="block text-gray-700">Password</label>
+                <label for="password" class="block text-gray-700">Kata Sandi</label>
                 <input type="password" id="password" name="password" required
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300">
                 <p id="passwordError" class="text-red-500 text-sm mt-2"></p>
@@ -33,7 +33,7 @@
             </button>
             <br><br>
             <div class="text-center">
-                <a class="small" href="{{ url('/forgot-password') }}">Forgot Password?</a>
+                <a class="small" href="{{ url('/forgot-password') }}">Lupa Kata Sandi?</a>
             </div>
         </form>
     </div>

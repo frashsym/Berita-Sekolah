@@ -27,6 +27,9 @@
                     {{ \Carbon\Carbon::parse($berita->jam_publikasi)->format('H:i') }}
                 </div>
                 <div class="mb-3">
+                    <strong>Dilihat:</strong> {{ $berita->views ?? 'Tidak Ada' }}
+                </div>
+                <div class="mb-3">
                     <strong>Isi Berita:</strong>
                     <p>{{ $berita->isi_berita }}</p>
                 </div>

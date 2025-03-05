@@ -46,6 +46,17 @@
                                         </svg>
                                     </button>
 
+                                    <!-- Tombol Detail -->
+                                    <a href="{{ url('/admin/' . $user->id) }}" class="btn btn-warning">
+                                        <span class="icon text-white-50">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                                                viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
+                                                <path fill="#ffffff"
+                                                    d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336l24 0 0-64-24 0c-13.3 0-24-10.7-24-24s10.7-24 24-24l48 0c13.3 0 24 10.7 24 24l0 88 8 0c13.3 0 24 10.7 24 24s-10.7 24-24 24l-80 0c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z" />
+                                            </svg>
+                                        </span>
+                                    </a>
+
                                     <!-- Tombol Hapus -->
                                     <button type="button" class="btn btn-danger" onclick="hapusAdmin({{ $user->id }})">
                                         <i class="fas fa-trash"></i>
@@ -68,7 +79,7 @@
                                             <h5 class="modal-title">Edit Admin</h5>
                                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                                         </div>
-                                        <form action="{{ route('admin.update', $user->id) }}" method="POST">
+                                        <form action="{{ route('admin.update', $user->id) }}" method="POST" enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
@@ -100,6 +111,16 @@
                                                         value="{{ $user->email }}" required>
                                                 </div>
                                                 <div class="form-group">
+                                                    <label for="photo">Foto Profile</label>
+                                                    <input type="file" class="form-control-file" id="photo" name="photo">
+                                                
+                                                    @if (!empty($user->photo))
+                                                        <div class="mt-2">
+                                                            <img src="{{ asset('images/profile/' . $user->photo) }}" class="img-thumbnail" width="100">
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="form-group">
                                                     <label>Password (Opsional)</label>
                                                     <input type="password" class="form-control" name="password"
                                                         placeholder="Kosongkan jika tidak ingin mengubah">
@@ -125,50 +146,52 @@
     </div>
 
     <!-- Modal Tambah Admin -->
-    <div class="modal fade" id="createAdminModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Tambah Admin</h5>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <form action="{{ route('admin.store') }}" method="POST">
-                    @csrf
-                    <div class="modal-body">
-                        <div class="form-group">
-                            <label>Nama</label>
-                            <input type="text" class="form-control" name="name" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Username</label>
-                            <input type="text" class="form-control" name="username" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Role</label>
-                            <select class="form-control" name="role_id" required>
-                                <option value="" disabled selected>Pilih Role</option>
-                                @foreach ($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->role }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label>Email</label>
-                            <input type="email" class="form-control" name="email" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input type="password" class="form-control" name="password" required>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                    </div>
-                </form>
+<div class="modal fade" id="createAdminModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tambah Admin</h5>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
+            <form action="{{ route('admin.store') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" class="form-control" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Username</label>
+                        <input type="text" class="form-control" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <select class="form-control" name="role_id" required>
+                            <option value="" disabled selected>Pilih Role</option>
+                            @foreach ($roles as $role)
+                                <option value="{{ $role->id }}">{{ $role->role }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="email" class="form-control" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Password</label>
+                        <input type="password" class="form-control" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="photo">Foto Profil</label>
+                        <input type="file" class="form-control-file" id="photo" name="photo" accept="image/*">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-primary">Simpan</button>
+                </div>
+            </form>
         </div>
     </div>
-
-
+</div>
 @endsection

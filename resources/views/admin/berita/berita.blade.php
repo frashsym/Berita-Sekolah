@@ -31,7 +31,7 @@
                                 <th>Isi Berita</th>
                                 <th>Kategori Berita</th>
                                 <th>Penulis Berita</th>
-                                <th>Views</th>
+                                <th>Dilihat</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
