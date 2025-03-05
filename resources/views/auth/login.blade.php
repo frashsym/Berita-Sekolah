@@ -17,7 +17,7 @@
         </div>
         <form id="loginForm">
             <div class="mb-4">
-                <label for="email" class="block text-gray-700">Email Address</label>
+                <label for="email" class="block text-gray-700">Email</label>
                 <input type="email" id="email" name="email" required
                     class="w-full px-4 py-2 border rounded-lg focus:ring focus:ring-blue-300">
                 <p id="emailError" class="text-red-500 text-sm mt-2"></p>
@@ -31,6 +31,10 @@
             <button type="submit" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition">
                 Log in
             </button>
+            <br><br>
+            <div class="text-center">
+                <a class="small" href="{{ url('/forgot-password') }}">Forgot Password?</a>
+            </div>
         </form>
     </div>
 
