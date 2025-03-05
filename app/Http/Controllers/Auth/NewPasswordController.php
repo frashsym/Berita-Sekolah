@@ -13,10 +13,18 @@ class NewPasswordController extends Controller
     /**
      * Display the password reset view.
      */
-    public function create(Request $request): View
+    public function create()
     {
-        return view('auth.reset-password', ['request' => $request]);
+        // Ambil email yang sudah diverifikasi dari session
+        $email = session('reset_email_verified');
+
+        if (!$email) {
+            return redirect()->route('password.request')->withErrors(['email' => 'Silakan verifikasi OTP terlebih dahulu.']);
+        }
+
+        return view('auth.reset-password');
     }
+
 
     /**
      * Handle an incoming new password request.
@@ -26,11 +34,17 @@ class NewPasswordController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'email' => ['required', 'email'],
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        $user = User::where('email', $request->email)->first();
+        // Ambil email dari session
+        $email = session('reset_email_verified');
+
+        if (!$email) {
+            return redirect()->route('password.request')->withErrors(['email' => 'Silakan verifikasi OTP terlebih dahulu.']);
+        }
+
+        $user = User::where('email', $email)->first();
 
         if (!$user) {
             return back()->withErrors(['email' => 'Email tidak ditemukan.']);
@@ -39,6 +53,9 @@ class NewPasswordController extends Controller
         // Update password user
         $user->password = Hash::make($request->password);
         $user->save();
+
+        // Hapus session setelah reset password selesai
+        session()->forget(['reset_email', 'reset_email_verified']);
 
         return redirect()->route('login')->with('status', 'Password berhasil diubah. Silakan login.');
     }
