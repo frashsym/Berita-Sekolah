@@ -45,6 +45,7 @@ class DashboardController extends Controller
         // Validasi input
         $request->validate([
             'name' => 'required|string|max:255',
+            'username' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'password' => 'nullable|min:6',
@@ -71,6 +72,7 @@ class DashboardController extends Controller
 
         // Update data user secara manual dan simpan
         $user->name = $request->name;
+        $user->username = $request->username;
         $user->email = $request->email;
 
         if ($request->filled('password')) {
