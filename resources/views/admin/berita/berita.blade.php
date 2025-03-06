@@ -47,7 +47,7 @@
                                     <td>
                                         <div class="d-flex gap-2">
                                             <!-- Tombol Edit -->
-                                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                            <button type="button" class="btn btn-success mr-1" data-toggle="modal"
                                                 data-target="#editBeritaModal{{ $item->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                     viewBox="0 0 512 512">
@@ -56,7 +56,7 @@
                                                 </svg>
                                             </button>
                                             <!-- Tombol Detail -->
-                                            <a href="{{ url('/berita/' . $item->id) }}" class="btn btn-warning">
+                                            <a href="{{ url('/berita/' . $item->id) }}" class="btn btn-warning mr-1">
                                                 <span class="icon text-white-50">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                         viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
@@ -66,7 +66,7 @@
                                                 </span>
                                             </a>
                                             <!-- Tombol Hapus -->
-                                            <button type="button" class="btn btn-danger"
+                                            <button type="button" class="btn btn-danger mr-1"
                                                 onclick="hapusBerita({{ $item->id }})">
                                                 <i class="fas fa-trash"></i>
                                             </button>

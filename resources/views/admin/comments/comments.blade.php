@@ -38,7 +38,7 @@
                                     <td>{{ $comment->rating }}</td>
                                     <td>
                                         <div class="d-flex gap-2">
-                                            <button type="button" class="btn btn-success" data-toggle="modal"
+                                            <button type="button" class="btn btn-success mr-1" data-toggle="modal"
                                                 data-target="#editCommentModal{{ $comment->id }}">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                     viewBox="0 0 512 512">
@@ -47,7 +47,7 @@
                                                 </svg>
                                             </button>
 
-                                            <a href="{{ url('/comments/' . $comment->id) }}" class="btn btn-warning">
+                                            <a href="{{ url('/comments/' . $comment->id) }}" class="btn btn-warning mr-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18"
                                                     viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.-->
                                                     <path fill="#ffffff"
@@ -55,7 +55,7 @@
                                                 </svg>
                                             </a>
 
-                                            <button type="button" class="btn btn-danger"
+                                            <button type="button" class="btn btn-danger mr-1"
                                                 onclick="hapusComment({{ $comment->id }})">
                                                 <i class="fas fa-trash"></i>
                                             </button>
