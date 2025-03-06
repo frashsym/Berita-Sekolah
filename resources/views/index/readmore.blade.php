@@ -18,7 +18,7 @@
             <div class="row justify-content-center"> <!-- Tambahkan justify-content-center -->
                 <div class="col-md-8">
                     <img class="img-fluid mx-auto d-block" src="{{ asset('images/berita/' . $berita->gambar_utama) }}"
-                        style="width: 350px; height: 450px;" alt="{{ $berita->judul }}" />
+                        style="width: auto; height: 450px;" alt="{{ $berita->judul }}" />
                     <p class="mt-3 text-center">{{ $berita->isi_berita }}</p> <!-- Pastikan teks juga rata tengah -->
                     <br><br>
                     <p>
