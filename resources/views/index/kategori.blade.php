@@ -1,6 +1,6 @@
 @extends('layouts.index.app')
 
-@section('title', 'Kategori Berita')
+@section('title', 'Kategori Berita NeperTimes')
 
 @section('content')
 

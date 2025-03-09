@@ -1,6 +1,6 @@
 @extends('layouts.index.app')
 
-@section('title', 'About')
+@section('title', 'About NeperTimes')
 
 @section('content')
 

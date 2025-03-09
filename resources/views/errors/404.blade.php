@@ -33,7 +33,7 @@
             <div class="error mx-auto" data-text="404">404</div>
             <p class="lead text-gray-800 mb-5">Halaman tidak ditemukan</p>
             <p class="text-gray-500 mb-0">Sepertinya kamu mengunjungi halaman yang salah...</p>
-            <a href="index.html">&larr; Kembali ke halaman utama</a>
+            <a href="{{ url('/') }}">&larr; Kembali ke halaman utama</a>
         </div>
 
     </div>
