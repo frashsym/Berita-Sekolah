@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Error 404</title>
+    <title>Error 419</title>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Custom fonts for this template-->
@@ -28,10 +28,10 @@
     <!-- Begin Page Content -->
     <div class="container-fluid d-flex justify-content-center align-items-center" style="height: 100vh;">
 
-        <!-- 404 Error Text -->
+        <!-- 419 Error Text -->
         <div class="text-center">
-            <div class="error mx-auto" data-text="404">404</div>
-            <p class="lead text-gray-800 mb-5">Halaman tidak ditemukan</p>
+            <div class="error mx-auto" data-text="419">419</div>
+            <p class="lead text-gray-800 mb-5">Halaman sudah expired</p>
             <p class="text-gray-500 mb-0">Sepertinya Anda mengalami kesalahan...</p>
             <a href="{{ url('/') }}">&larr; Kembali ke halaman utama</a>
         </div>
