@@ -6,6 +6,7 @@ use Illuminate\Database\Seeder;
 use Database\Seeders\KategoriSeeder;
 use Database\Seeders\BeritaSeeder;
 use Database\Seeders\UserSeeder;
+use Database\Seeders\RoleSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,6 +15,7 @@ class DatabaseSeeder extends Seeder
         $this->call([
             KategoriSeeder::class,
             BeritaSeeder::class,
+            RoleSeeder::class,
             UserSeeder::class,
         ]);
     }
